@@ -1,0 +1,425 @@
+// Dota Heroes File
+"DOTAAbilities"
+{
+	"Version"		"1"
+
+	//=================================================================================================================
+	// Common Ability - Run
+	//=================================================================================================================
+	"datadriven_common_run"
+	{
+	    // General  
+	    // ----------------------------------------------------------------------------------------
+	    "BaseClass"              "ability_datadriven"
+	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	    "AbilityTextureName"     "common_run"
+
+	    "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+	    "MaxLevel"               "1"
+	    "RequiredLevel"          "0"
+	    "LevelsBetweenUpgrades"  "1"
+	    
+	    "AbilityCastPoint"       "0.0"
+	    "AnimationPlaybackRate"  "1"
+	    "AnimationIgnoresModelScale" "1"
+
+	    // Stats
+	    //----------------------------------------------------------------------------------------
+	    "AbilityManaCost"         "5 10 15 20"
+	    "AbilityCooldown"         "30.0 20.0 10.0 5.0"
+	    "AbilityCastRange"        "0"
+
+	  	// Special
+	  	//----------------------------------------------------------------------------------------
+	  	"OnSpellStart"
+			{			
+				"ApplyModifier"
+				{
+					"ModifierName"	"running_movement_speed"
+					"Target" 		"CASTER"
+					"Duration"		"%duration"
+				}
+			}
+	  
+	  	"Modifiers"
+			{
+				"running_movement_speed"
+				{
+					"Passive"			"0"
+					"IsHidden"			"0"
+					"IsDebuff"			"0"
+					"Duration"			"%duration"
+					"Properties"
+					{
+					    "MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT" "100"
+					}
+				}
+			}
+			"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"duration"			"6.0 8.0 8.0 8.0"
+				}
+			}
+	}
+
+	//=================================================================================================================
+	// Common Ability - Sleep
+	//=================================================================================================================
+	"datadriven_common_sleep"
+	{
+	    // General  
+	    // ----------------------------------------------------------------------------------------
+	    "BaseClass"              "ability_datadriven"
+	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+	    "AbilityTextureName"     "common_sleep"
+
+	    "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+	    "MaxLevel"               "1"
+	    "RequiredLevel"          "0"
+	    "LevelsBetweenUpgrades"  "1"
+	    
+	    "AbilityCastPoint"       "0.0"
+	    "AnimationPlaybackRate"  "1"
+	    "AnimationIgnoresModelScale" "1"
+
+	    // Stats
+	    //----------------------------------------------------------------------------------------
+	    "AbilityManaCost"       "0"
+	    "AbilityCooldown"       "30.0"
+	    "AbilityCastRange"      "200"
+	    "AbilityChannelTime"	"30.0"
+
+	  	// Special
+	    // ...
+	  	"OnSpellStart"
+			{			
+				"ApplyModifier"
+				{
+					"ModifierName"	"sleeping_regen"
+					"Target" 		"CASTER"
+					"Duration"		"%duration"
+				}
+			}
+
+		"OnChannelFinish"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"	"sleeping_regen"
+				"Target" 		"CASTER"
+			}
+		}
+	  
+	  	"Modifiers"
+			{
+				"sleeping_regen"
+				{
+					"Passive"			"0"
+					"IsHidden"			"0"
+					"IsDebuff"			"0"
+					"Duration"			"%duration"
+					"Properties"
+					{
+					    "MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE" "2"
+					    "MODIFIER_PROPERTY_MANA_REGEN_TOTAL_PERCENTAGE"	"2"
+					}
+					"EffectName" "particles/newplayer_fx/npx_sleeping.vpcf"
+    				"EffectAttachType"  "follow_overhead"
+    				"OverrideAnimation" "ACT_DOTA_DISABLED"
+				}
+			}
+			"AbilitySpecial"
+			{
+				"01"
+				{
+					"var_type"			"FIELD_FLOAT"
+					"duration"			"30.0"
+				}
+			}
+	}
+
+	//=================================================================================================================
+	// Miner Ability - Mine
+	//=================================================================================================================
+	"datadriven_miner_mine"
+	{
+	    // General  
+	    // ----------------------------------------------------------------------------------------
+	    "BaseClass"              "ability_datadriven"
+	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+	    "AbilityUnitTargetTeam"	 "DOTA_UNIT_TARGET_TEAM_ENEMY"
+	    "AbilityUnitTargetType"	 "DOTA_UNIT_TARGET_BASIC"
+	    "AbilityTextureName"     "miner_mine"
+
+	    "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+	    "MaxLevel"               "4"
+	    "RequiredLevel"          "0"
+	    "LevelsBetweenUpgrades"  "1"
+	    
+	    "AbilityCastPoint"       "0.0"
+	    "AnimationPlaybackRate"  "1"
+	    "AnimationIgnoresModelScale" "1"
+
+	    // Stats
+	    //----------------------------------------------------------------------------------------
+	    "AbilityManaCost"       "0"
+	    "AbilityCooldown"       "30.0"
+	    "AbilityChannelTime"	"5.0"
+	    "AbilityCastRange"      "200"
+
+	  	// Special
+	  	"OnChannelSucceeded"
+	  	{
+	  		"RunScript"
+	  		{
+	  			"ScriptFile"	"abilities.lua"
+	  			"Function"		"OnMineFinished"
+	  		}
+	  	}
+	}
+
+	//=================================================================================================================
+	// Miner Ability - ChopChop
+	//=================================================================================================================
+	"datadriven_miner_chopchop"
+	{
+	    // General  
+	    // ----------------------------------------------------------------------------------------
+	    "BaseClass"              "ability_datadriven"
+	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+	    "AbilityUnitTargetType"	 "DOTA_UNIT_TARGET_TREE"
+	    "AbilityTextureName" 	 "miner_chop_chop"
+
+	    "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+	    "MaxLevel"               "4"
+	    "RequiredLevel"          "0"
+	    "LevelsBetweenUpgrades"  "1"
+	    
+	    "AbilityCastPoint"       "0.0"
+	    "AnimationPlaybackRate"  "1"
+	    "AnimationIgnoresModelScale" "1"
+
+	    // Stats
+	    //----------------------------------------------------------------------------------------
+	    "AbilityManaCost"       "0"
+	    "AbilityCooldown"       "30.0"
+	    "AbilityChannelTime"	"5.0"
+	    "AbilityCastRange"      "200"
+
+	  	// Special
+	  	"OnChannelSucceeded"
+	  	{
+	  		"RunScript"
+	  		{
+	  			"ScriptFile"	"abilities.lua"
+	  			"Function"		"OnChopChopFinished"
+	  		}
+	  	}
+	}
+
+	//=================================================================================================================
+	// Defender Ability - Armor Up
+	//=================================================================================================================
+	"datadriven_defender_armor_up"
+	{
+	    // General  
+	    // ----------------------------------------------------------------------------------------
+	    "BaseClass"              "ability_datadriven"
+	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_TOGGLE"
+	    "AbilityUnitTargetType"	 "DOTA_ABILITY_BEHAVIOR_TOGGLE"
+	    "AbilityTextureName" 	 "defender_armor_up"
+
+	    "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+	    "MaxLevel"               "4"
+	    "RequiredLevel"          "0"
+	    "LevelsBetweenUpgrades"  "1"
+	    
+	    "AbilityCastPoint"       "0.0"
+	    "AnimationPlaybackRate"  "1"
+	    "AnimationIgnoresModelScale" "1"
+
+	    // Stats
+	    //----------------------------------------------------------------------------------------
+	    "AbilityManaCost"       "0"
+	    "AbilityCooldown"       "5.0"
+
+	  	// Special
+	  	//----------------------------------------------------------------------------------------
+	  	"OnToggleOn"
+	  	{
+	  		"ApplyModifier"
+	  		{
+	  			"ModifierName"	"defender_armor_up"
+	  			"Target" 		"CASTER"
+	  		}
+	  	}
+	  	"OnToggleOff"
+	  	{
+	  		"RemoveModifier"
+	  		{
+	  			"ModifierName"	"defender_armor_up"
+	  			"Target" 		"CASTER"
+	  		}
+	  	}
+
+	  	"Modifiers"
+	  	{
+	  		"defender_armor_up"
+	  		{
+	  			"Passive"			"0"
+	  			"IsHidden"			"0"
+	  			"IsDebuff"			"0"
+	  	
+	  			"Properties"
+	  			{
+	  				"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor"
+	  			}
+	  		}
+	  	}
+
+	  	"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"armor"				"5.0 10.0 15.0 20.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Defender Ability - Frenzy
+	//=================================================================================================================
+	"datadriven_defender_frenzy"
+	{
+	    // General  
+	    // ----------------------------------------------------------------------------------------
+	    "BaseClass"              "ability_datadriven"
+	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_TOGGLE"
+	    "AbilityUnitTargetType"	 "DOTA_ABILITY_BEHAVIOR_TOGGLE"
+	    "AbilityTextureName" 	 "defender_frenzy"
+
+	    "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+	    "MaxLevel"               "4"
+	    "RequiredLevel"          "0"
+	    "LevelsBetweenUpgrades"  "1"
+	    
+	    "AbilityCastPoint"       "0.0"
+	    "AnimationPlaybackRate"  "1"
+	    "AnimationIgnoresModelScale" "1"
+
+	    // Stats
+	    //----------------------------------------------------------------------------------------
+	    "AbilityManaCost"       "0"
+	    "AbilityCooldown"       "5.0"
+
+	  	// Special
+	  	//----------------------------------------------------------------------------------------
+	  	"OnToggleOn"
+	  	{
+	  		"ApplyModifier"
+	  		{
+	  			"ModifierName"	"defender_frenzy"
+	  			"Target" 		"CASTER"
+	  		}
+	  	}
+	  	"OnToggleOff"
+	  	{
+	  		"RemoveModifier"
+	  		{
+	  			"ModifierName"	"defender_frenzy"
+	  			"Target" 		"CASTER"
+	  		}
+	  	}
+
+	  	"Modifiers"
+	  	{
+	  		"defender_frenzy"
+	  		{
+	  			"Passive"			"0"
+	  			"IsHidden"			"0"
+	  			"IsDebuff"			"0"
+	  	
+	  			"Properties"
+	  			{
+	  				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attackspeed"
+	  			}
+	  		}
+	  	}
+
+	  	"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"attackspeed"		"30.0 60.0 90.0 120.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Alchemist Ability - Gather Herb
+	//=================================================================================================================
+	"lua_alchemist_gather_herb"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				 "ability_lua"
+		"ScriptFile"			 "lua_alchemist_gather_herb"
+	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+	    "AbilityUnitTargetTeam"	 "DOTA_UNIT_TARGET_TEAM_ENEMY"
+	    "AbilityUnitTargetType"	 "DOTA_UNIT_TARGET_BASIC"
+	    "AbilityTextureName"     "alchemist_gather_herb"
+
+	    "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+	    "MaxLevel"               "4"
+	    "RequiredLevel"          "0"
+	    "LevelsBetweenUpgrades"  "1"
+	    
+	    "AbilityCastPoint"       "0.0"
+	    "AnimationPlaybackRate"  "1"
+	    "AnimationIgnoresModelScale" "1"
+
+	    // Stats
+	    //----------------------------------------------------------------------------------------
+	    "AbilityManaCost"       "0"
+	    "AbilityCooldown"       "30.0"
+	    "AbilityChannelTime"	"5.0"
+	    "AbilityCastRange"      "200"
+
+	  	// Special
+	}
+
+	//=================================================================================================================
+	// Builder Ability - Build item
+	//=================================================================================================================
+	"lua_builder_build_item"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				 "ability_lua"
+		"ScriptFile"			 "lua_builder_build_item"
+	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+	    "AbilityTextureName"     "builder_build_item"
+
+	    "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+	    "MaxLevel"               "4"
+	    "RequiredLevel"          "0"
+	    "LevelsBetweenUpgrades"  "1"
+	    
+	    "AbilityCastPoint"       "0.0"
+	    "AnimationPlaybackRate"  "1"
+	    "AnimationIgnoresModelScale" "1"
+
+	    // Stats
+	    //----------------------------------------------------------------------------------------
+	    "AbilityManaCost"       "0"
+	    "AbilityCooldown"       "30.0"
+	    "AbilityChannelTime"	"10.0"
+
+	  	// Special
+	}
+}

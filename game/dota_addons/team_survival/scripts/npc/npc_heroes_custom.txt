@@ -1,0 +1,24 @@
+// Dota Heroes File
+// NOTE: This is not for creating new heroes, this is for taking a currently existing hero as a template and overriding
+// the specified key-value combinations.  Use override_hero <hero_to_override> for this.
+"DOTAHeroes"
+{
+	//=================================================================================================================
+	// HERO: Running Troll
+	//=================================================================================================================
+	"npc_dota_hero_troll_warlord_overridden"
+	{
+		"override_hero"			"npc_dota_hero_troll_warlord"	// Hero to override
+		"AbilityLayout"			"6"
+		"Ability1"				"datadriven_common_run"
+		"Ability2"				"datadriven_common_sleep"
+		"Ability3"				""
+		"Ability4"				""
+		"Ability5"				"lua_builder_build_item"
+		"Ability6"				"lua_alchemist_gather_herb"
+	}
+}
+		//"Ability3"				"datadriven_miner_mine"
+		//"Ability4"				"datadriven_miner_chopchop"
+		//"Ability5"				"datadriven_defender_armor_up"
+		//"Ability6"				"datadriven_defender_frenzy"

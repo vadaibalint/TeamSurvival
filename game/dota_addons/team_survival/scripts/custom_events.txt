@@ -1,0 +1,7 @@
+//cgm stands for customGameMode, it is a good idea to give your events a custom prefix so you don't accidentally cause collisions with existing events.
+"cgm_player_lumber_changed"
+{
+    //define the name of the parameter and the type, we use a short for these values (16 bit integer)
+    "player_ID"      "short"
+    "lumber_amount"  "short"
+}

@@ -1,0 +1,235 @@
+"DOTAAbilities"
+{
+	//=================================================================================================================
+	// Sleeping Bag
+	//=================================================================================================================
+	"item_sleeping_bag"
+	{
+		"ID"							"2000"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELED"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_sleeping_bag"
+
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"10.0"
+		"AbilityChannelTime"			"25.0"
+		"AbilityCastRange"				"200"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCastAnimation"			"ACT_DOTA_IDLE_SLEEPING"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{			
+			"ApplyModifier"
+			{
+				"ModifierName"	"sleeping_mana_regen"
+				"Target" 		"CASTER"
+				"Duration"		"25"
+			}
+		}
+
+		"OnChannelFinish"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"	"sleeping_mana_regen"
+				"Target" 		"CASTER"
+			}
+		}
+
+		"Modifiers"
+		{
+			"sleeping_mana_regen"
+			{
+				"Passive"			"0"
+				"IsHidden"			"0"
+				"IsDebuff"			"0"
+				"Duration"			"25"
+				"Properties"
+				{
+				    "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT" "10" 
+				}
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Sleeping Bag
+	//=================================================================================================================
+	"item_sleeping_bag_two"
+	{
+		"ID"							"2003"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELED"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_sleeping_bag"
+
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"10.0"
+		"AbilityChannelTime"			"25.0"
+		"AbilityCastRange"				"200"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCastAnimation"			"ACT_DOTA_IDLE_SLEEPING"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{
+			"RunScript"
+    		{
+          		"ScriptFile" "items.lua"
+            	"Function"   "SleepingEnergyRegenStart"
+    		}
+		}
+
+		"OnChannelFinish"
+		{
+			"RunScript"
+    		{
+          		"ScriptFile" "items.lua"
+            	"Function"   "SleepingEnergyRegenStop"
+    		}
+		}
+	}
+	
+
+	//=================================================================================================================
+	// Axe
+	//=================================================================================================================
+	"item_axe"
+	{
+		"ID"							"2001"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_axe"
+
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"10.0"
+		"AbilityCastRange"				"150"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCastAnimation"			"ACT_DOTA_EARTHSHAKER_TOTEM_ATTACK"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{
+			"RunScript"
+    		{
+          		"ScriptFile" "items.lua"
+            	"Function"   "GainLumber"
+    		}
+		}
+	}
+
+	//=================================================================================================================
+	// Resource: Rock
+	//=================================================================================================================
+	"item_team_survival_rock"
+	{
+		"ID"							"3001"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_team_survival_rock"
+		//"Model"							"models/particle/earth_spirit_rockspike05.vmdl"
+		//"Model"							"models\props_stone\stoneblock006a"
+	}
+
+	//=================================================================================================================
+	// Resource: Wood
+	//=================================================================================================================
+	"item_team_survival_wood"
+	{
+		"ID"							"3002"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_team_survival_wood"
+		//"Model"							"models/team_survival_log.vmdl"
+	}
+
+	//=================================================================================================================
+	// Resource: Mushroom
+	//=================================================================================================================
+	"item_team_survival_mushroom"
+	{
+		"ID"							"3003"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_team_survival_mushroom"
+		"Model"							"models\props_nature\mushroom_wild001.vmdl"
+	}
+
+	//=================================================================================================================
+	// Resource: Cattail
+	//=================================================================================================================
+	"item_team_survival_cattail"
+	{
+		"ID"							"3004"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_team_survival_cattail"
+		"Model"							"models\props_nature\cattails001.vmdl"
+	}
+
+	//=================================================================================================================
+	// Profession selector: Miner
+	//=================================================================================================================
+	"item_team_survival_miner_tools"
+	{
+		"ID"							"5001"		
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_team_survival_miner_tools"
+		//"Model"							"models\props_mines\mine_tool_bucket001.vmdl"
+
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemInitialCharges" 			"1"
+		"ItemDisplayCharges" 			"0"
+		"ItemRequiresCharges" 			"1"
+		"ItemStackable" 				"0"
+		"ItemPermanent" 				"0"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES"
+
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"60.0"
+		"AbilityCastRange"				"500"
+		"AbilityCastPoint"				"0.0"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{
+			"SpendCharge" {}
+			"RunScript"
+    		{
+          		"ScriptFile" "items.lua"
+            	"Function"   "AddMinerAbilities"
+    		}
+		}
+	}
+
+}
