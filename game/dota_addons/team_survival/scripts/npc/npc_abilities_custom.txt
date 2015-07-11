@@ -394,16 +394,16 @@
 	}
 
 	//=================================================================================================================
-	// Builder Ability - Build item
+	// Alchemist Ability - Craft potion
 	//=================================================================================================================
-	"lua_builder_build_item"
+	"lua_alchemist_craft_potion"
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"				 "ability_lua"
-		"ScriptFile"			 "lua_builder_build_item"
-	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
-	    "AbilityTextureName"     "builder_build_item"
+		"ScriptFile"			 "lua_alchemist_craft_potion"
+	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
+	    "AbilityTextureName"     "alchemist_craft_potion"
 
 	    "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
 	    "MaxLevel"               "4"
@@ -417,8 +417,65 @@
 	    // Stats
 	    //----------------------------------------------------------------------------------------
 	    "AbilityManaCost"       "0"
-	    "AbilityCooldown"       "30.0"
-	    "AbilityChannelTime"	"10.0"
+	    "AbilityCooldown"       "0.0"
+
+	  	// Special
+	}
+
+	//=================================================================================================================
+	// Builder Ability - Craft item
+	//=================================================================================================================
+	"lua_builder_craft_item"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				 "ability_lua"
+		"ScriptFile"			 "lua_builder_craft_item"
+	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
+	    "AbilityTextureName"     "builder_craft_item"
+
+	    "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+	    "MaxLevel"               "4"
+	    "RequiredLevel"          "0"
+	    "LevelsBetweenUpgrades"  "1"
+	    
+	    "AbilityCastPoint"       "0.0"
+	    "AnimationPlaybackRate"  "1"
+	    "AnimationIgnoresModelScale" "1"
+
+	    // Stats
+	    //----------------------------------------------------------------------------------------
+	    "AbilityManaCost"       "0"
+	    "AbilityCooldown"       "0.0"
+
+	  	// Special
+	}
+
+	//=================================================================================================================
+	// Builder Ability - Craft building
+	//=================================================================================================================
+	"lua_builder_craft_building"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				 "ability_lua"
+		"ScriptFile"			 "lua_builder_craft_building"
+	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
+	    "AbilityTextureName"     "builder_craft_building"
+
+	    "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+	    "MaxLevel"               "4"
+	    "RequiredLevel"          "0"
+	    "LevelsBetweenUpgrades"  "1"
+	    
+	    "AbilityCastPoint"       "0.0"
+	    "AnimationPlaybackRate"  "1"
+	    "AnimationIgnoresModelScale" "1"
+
+	    // Stats
+	    //----------------------------------------------------------------------------------------
+	    "AbilityManaCost"       "0"
+	    "AbilityCooldown"       "0.0"
 
 	  	// Special
 	}

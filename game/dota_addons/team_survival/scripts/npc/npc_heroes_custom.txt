@@ -12,9 +12,9 @@
 		"AbilityLayout"			"6"
 		"Ability1"				"datadriven_common_run"
 		"Ability2"				"datadriven_common_sleep"
-		"Ability3"				""
-		"Ability4"				""
-		"Ability5"				"lua_builder_build_item"
+		"Ability3"				"lua_builder_craft_item"
+		"Ability4"				"lua_builder_craft_building"
+		"Ability5"				"lua_alchemist_craft_potion"
 		"Ability6"				"lua_alchemist_gather_herb"
 	}
 }

@@ -484,6 +484,7 @@ function GameMode:OnAbilityUsed(keys)
 	--local player = EntIndexToHScript(keys.PlayerID)
 	local player = PlayerResource:GetPlayer(keys.PlayerID)
 	local abilityname = keys.abilityname
+
 end
 
 -- A non-player entity (necro-book, chen creep, etc) used an ability
@@ -610,24 +611,14 @@ end
 function GameMode:GetItems(caster)
 	local items = {}
 	for i=0,5 do
-		print("---------------------")
-		print(i)
 		local itemHandle = caster:GetItemInSlot(i)
 		if itemHandle then
-			print("got handle")
 			local itemName = caster:GetItemInSlot(i):GetAbilityName()
-			print("NAME -> " .. itemName)
-			print(items[itemName])
 			if not items[itemName] then
-				print("not.")
 				items[itemName] = 1
 			else
-				print("yes.")
 				items[itemName] = items[itemName] + 1
 			end
-			print("----")
-			print(items[itemName])
-			print("---------------------")
 		end
 	end
 	return items
