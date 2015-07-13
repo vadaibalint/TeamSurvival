@@ -46,6 +46,7 @@ function UpdateCraftingButton(button, items)
 	switch(button.id){
 		case "item_axe":
 			SetCraftableFlag(button, items, "item_team_survival_wood", "2", "item_team_survival_rock", "1");
+			button.requirement = ["item_team_survival_wood", "2", "item_team_survival_rock", "1"];
 			break;
 		case "item_spear":
 			SetCraftableFlag(button, items, "item_team_survival_wood", "3");
@@ -106,5 +107,8 @@ function OnButtonPressed(id)
 	$.Msg("isCraftable -> ", button.iscraftable);
 	if (button.iscraftable){
 		// do smth
+		// send cost?
+		$.Msg("Button req. -> ", button.requirement);
+		GameEvents.SendCustomGameEventToServer( "event_craft_ability_used", { "item_id" : id, "requirement" : button.requirement } );
 	}
 }

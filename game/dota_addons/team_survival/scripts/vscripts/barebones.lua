@@ -108,6 +108,8 @@ function GameMode:InitGameMode()
 	ListenToGameEvent('dota_team_kill_credit', Dynamic_Wrap(GameMode, 'OnTeamKillCredit'), self)
 	ListenToGameEvent("player_reconnected", Dynamic_Wrap(GameMode, 'OnPlayerReconnect'), self)
 
+	CustomGameEventManager:RegisterListener("event_craft_ability_used", OnCraftAbilityUsed)
+
 	-- Change random seed
 	local timeTxt = string.gsub(string.gsub(GetSystemTime(), ':', ''), '0','')
 	math.randomseed(tonumber(timeTxt))
@@ -622,4 +624,48 @@ function GameMode:GetItems(caster)
 		end
 	end
 	return items
+end
+
+function OnCraftAbilityUsed(eventSourceIndex, args)
+	-- print("Trying to craft: " .. event_data.item_id);
+	print( "My event: ( " .. eventSourceIndex .. ", " .. args['item_id'] .. " )" )
+
+	local player = EntIndexToHScript(eventSourceIndex)
+	local hero = player:GetAssignedHero()
+
+	-- TODO refine this!! this part looks such a mess, there HAS TO BE a way to do it better
+	local req = args['requirement']
+	DeepPrintTable(req)
+	print(req)
+
+	local max = 0
+	local readtable = {}
+	for k,v in pairs(req) do
+		print(k,v)
+		local knum = tonumber(k)
+		if knum > max then
+			max = knum
+		end
+		readtable[knum] = v
+	end
+	print("max : " .. max)
+
+	for i=0,max,2 do
+		local itemName = readtable[i]
+		local itemCount = readtable[i+1]
+		
+		for i=1,itemCount do
+			print("trying to remove : " .. itemName)
+			for i=0,5 do
+				local item = hero:GetItemInSlot(i)
+				if item and item:GetAbilityName() == itemName then
+					hero:RemoveItem(item)
+					break;
+				end
+			end
+		end
+	end
+	
+	local craftedItem = CreateItem(args['item_id'], nil, nil)
+	hero:AddItem(craftedItem)
 end
