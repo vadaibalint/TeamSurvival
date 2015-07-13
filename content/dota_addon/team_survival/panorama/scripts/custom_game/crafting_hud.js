@@ -1,6 +1,73 @@
-GameEvents.Subscribe( "event_craft_item_ability_used", OnCraftItemAbilityEvent);
-GameEvents.Subscribe( "event_craft_building_ability_used", OnCraftBuildingAbilityEvent);
-GameEvents.Subscribe( "event_craft_potion_ability_used", OnCraftPotionAbilityEvent);
+var isUIActive = false;
+
+(function()
+{
+	GameEvents.Subscribe( "event_craft_item_ability_used", OnCraftItemAbilityEvent);
+	GameEvents.Subscribe( "event_craft_building_ability_used", OnCraftBuildingAbilityEvent);
+	GameEvents.Subscribe( "event_craft_potion_ability_used", OnCraftPotionAbilityEvent);
+	// TODO listen to inventory change event -> update the buttons
+	// if inventory change event is listened to hten scheduled update can be disregarded
+})();
+
+function UpdateCraftingUI()
+{
+	
+	var items = GetItemsInInventory();
+	var buttons = $("#itemCrafting").FindChildrenWithClassTraverse("craftingButton");
+	for (var i = 0; i < buttons.length; i++) {
+		// CraftItem lvl can be passed so lvlreq can be checked as well
+		UpdateCraftingButton(buttons[i], items);
+	};
+
+	if(isUIActive) {
+		$.Schedule(0.1, UpdateCraftingUI);
+	};
+}
+
+function GetItemsInInventory()
+{
+	var inventory = Game.GetPlayerItems(Players.GetLocalPlayer()).inventory;
+	var items = {};
+	for (var i = 0; i <= 5; i++) {
+		if(inventory[i]){
+			var itemName = inventory[i].item_name;
+			items[itemName] = items[itemName] || 0;
+			items[itemName]++;
+		} else {
+			continue;
+		}
+	};
+
+	return items;
+}
+
+function UpdateCraftingButton(button, items)
+{
+	switch(button.id){
+		case "item_axe":
+			SetCraftableFlag(button, items, "item_team_survival_wood", "2", "item_team_survival_rock", "1");
+			break;
+		case "item_spear":
+			SetCraftableFlag(button, items, "item_team_survival_wood", "3");
+			break;
+		default:
+			break;
+	}
+}
+
+function SetCraftableFlag(button, items)
+{
+	var craftable = true;
+	for (var i = 2; i < arguments.length; i+=2) {
+        if (!items[arguments[i]] || items[arguments[i]] < arguments[i+1]){
+        	craftable = false;
+        	break;
+        }
+    }
+
+    button.SetHasClass("craftable", craftable);
+    button.iscraftable = craftable;
+}
 
 function OnCraftItemAbilityEvent(event_data)
 {
@@ -9,6 +76,9 @@ function OnCraftItemAbilityEvent(event_data)
 	} else{
 		$("#itemCrafting").visible = false;
 	}
+
+	isUIActive = !isUIActive;
+	UpdateCraftingUI();
 }
 
 function OnCraftBuildingAbilityEvent(event_data)
@@ -29,7 +99,12 @@ function OnCraftPotionAbilityEvent(event_data)
 	}
 }
  
-function OnButtonPressed(button)
+function OnButtonPressed(id)
 {
-	$.Msg("OnButtonPressed -> ", button);
+	$.Msg("OnButtonPressed -> ", id);
+	var button = $("#" + id);
+	$.Msg("isCraftable -> ", button.iscraftable);
+	if (button.iscraftable){
+		// do smth
+	}
 }

@@ -20,8 +20,14 @@
 	background-color: #AFAFAF;
 	border: 1px solid red;
 	margin: 5px;
+	wash-color: #FFAAAAFF;
 }
 
 .craftingButtonLabel{
 	border: 1px solid red;
+}
+
+.craftable{
+	border: 5px solid green;
+	wash-color: #00000000;
 }

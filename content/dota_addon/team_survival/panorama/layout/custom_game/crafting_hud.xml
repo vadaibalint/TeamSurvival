@@ -9,12 +9,12 @@
 		<!-- Item crafting HUD-->
 		<Panel class="craftingContainer" id="itemCrafting">
 			<!-- Item Axe-->
-			<Button class="craftingButton" id="item_axe" onactivate="OnButtonPressed('axe')">
+			<Button class="craftingButton" id="item_axe" onactivate="OnButtonPressed('item_axe')">
 				<Image src="file://{images}/craft_item_axe.png" />
 				<Label class="craftingButtonLabel" text="Build axe." />
 			</Button>
 			<!-- Item Spear-->
-			<Button class="craftingButton" id="item_spear" onactivate="OnButtonPressed('spear')">
+			<Button class="craftingButton" id="item_spear" onactivate="OnButtonPressed('item_spear')">
 				<!-- <Image src="file://{images}/craft_item_axe.png" /> -->
 				<Label class="craftingButtonLabel" text="Build spear." />
 			</Button>
