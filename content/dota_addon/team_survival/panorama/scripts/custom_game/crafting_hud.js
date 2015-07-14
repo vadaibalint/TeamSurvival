@@ -45,22 +45,24 @@ function UpdateCraftingButton(button, items)
 {
 	switch(button.id){
 		case "item_axe":
-			SetCraftableFlag(button, items, "item_team_survival_wood", "2", "item_team_survival_rock", "1");
-			button.requirement = ["item_team_survival_wood", "2", "item_team_survival_rock", "1"];
+			// SetCraftableFlag(button, items, "item_team_survival_wood", "2", "item_team_survival_rock", "1");
+			// button.requirement = ["item_team_survival_wood", "2", "item_team_survival_rock", "1"];
+			SetCraftableFlag(button, items, ["item_team_survival_wood", "2", "item_team_survival_rock", "1"]);
 			break;
 		case "item_spear":
-			SetCraftableFlag(button, items, "item_team_survival_wood", "3");
+			SetCraftableFlag(button, items, ["item_team_survival_wood", "3"]);
 			break;
 		default:
 			break;
 	}
 }
 
-function SetCraftableFlag(button, items)
+function SetCraftableFlag(button, items, req)
 {
+	button.requirement = req
 	var craftable = true;
-	for (var i = 2; i < arguments.length; i+=2) {
-        if (!items[arguments[i]] || items[arguments[i]] < arguments[i+1]){
+	for (var i = 0; i < req.length; i+=2) {
+        if (!items[req[i]] || items[req[i]] < req[i+1]){
         	craftable = false;
         	break;
         }
