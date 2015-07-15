@@ -126,6 +126,7 @@ function GameMode:InitGameMode()
 
 	self.nRadiantKills = 0
 	self.nDireKills = 0
+	self.nWaveUnits = 0
 
 	self.bSeenWaitForPlayers = false
 
@@ -250,6 +251,29 @@ end
 ]]
 function GameMode:OnAllPlayersLoaded()
 	print("[BAREBONES] All Players have loaded into the game")
+
+	local spawner = Entities:FindByName(nil, "spawner_rock")
+	local cord =  spawner:GetAbsOrigin()
+	print("vuserid")
+	DeepPrintTable(self.vUserIds)
+	print("nwaveunits")
+	print(self.nWaveUnits)
+	local unitNum = self.nWaveUnits
+	Timers:CreateTimer("WaveSpawner", {callback = 
+		function()
+			print("wave is active")
+			if unitNum < 5 then
+				print(unitNum .. " -> need more units")
+				CreateUnitByName("team_survival_wave_wolf", cord, true, nil, nil, DOTA_TEAM_BADGUYS)
+				unitNum =  unitNum + 1
+				return 1
+			else
+				print("wave ended, waiting 5 sec")
+				unitNum = 0
+				return 5
+			end
+		end}
+	)
 end
 
 --[[
