@@ -1,0 +1,8 @@
+pve_test1
+{
+	material materials/overviews/pve_test1.vmat
+	pos_x -8192
+	pos_y 8192
+	scale 16.000
+}
+
