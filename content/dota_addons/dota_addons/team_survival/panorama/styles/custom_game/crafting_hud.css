@@ -1,0 +1,33 @@
+.container{
+	background-color: #AAAAAA;
+	border: 1px solid red;
+	width: 500px;
+	horizontal-align: center;
+	y: 70%;
+	flow-children: right;
+}
+
+.craftingContainer{
+	border: 1px solid red;
+	visibility: collapse;
+	flow-children: right;
+	margin: 5px;
+}
+
+.craftingButton{
+	width: 64px;
+	height: 64px;
+	background-color: #AFAFAF;
+	border: 1px solid red;
+	margin: 5px;
+	wash-color: #FFAAAAFF;
+}
+
+.craftingButtonLabel{
+	border: 1px solid red;
+}
+
+.craftable{
+	border: 5px solid green;
+	wash-color: #00000000;
+}
