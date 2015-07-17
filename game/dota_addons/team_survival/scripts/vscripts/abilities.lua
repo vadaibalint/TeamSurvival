@@ -24,4 +24,15 @@ function OnChopChopFinished(keys)
         local pos_launch = pos+RandomVector(RandomFloat(150,200))
         item:LaunchLoot(false, 200, 0.75, pos_launch)
 	end
+
+        local tree = keys.target
+
+        if tree.health then
+                tree.health = tree.health - 1
+                if tree.health == 0 then
+                        tree:CutDown(caster:GetTeamNumber())
+                end
+        else
+                tree.health = 5
+        end
 end
