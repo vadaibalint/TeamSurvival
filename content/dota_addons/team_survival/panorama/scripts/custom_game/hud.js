@@ -1,3 +1,5 @@
+var energymax = 0;
+var energy = 0;
 var heatmax = 0;
 var heat = 0;
 
@@ -9,23 +11,28 @@ var heat = 0;
 
 function OnEnergyChangeEvent( event_data )
 {
-	if (event_data.energy){
-		$("#energy_counter").text = event_data.energy;
+	if (typeof event_data.energymax !== "undefined"){
+		energymax = event_data.energymax;
 	}
+
+	if (typeof event_data.energy !== "undefinde"){
+		energy = event_data.energy;
+		$("#energy_text").text = "Energy: " + energy + " / " + energymax;
+		$("#energy_meter").style.width = energy / energymax * 100 + "%";
+	}
+
 }
 
 function OnHeatChangeEvent( event_data )
 {
-	if (event_data.heatmax){
-		$.Msg("heatmax changed : ", heatmax, " -> ", event_data.heatmax)
+	if (typeof event_data.heatmax !== "undefined"){
 		heatmax = event_data.heatmax;
 	}
 
-	if (event_data.heat){
+	if (typeof event_data.heat !== "undefinde"){
 		heat = event_data.heat;
-		$.Msg("heat is : ", heat / heatmax * 100, "%")
-		$("#heat_meter").style.width = heat / heatmax * 100 + "%";
 		$("#heat_text").text = "Heat: " + heat + " / " + heatmax;
+		$("#heat_meter").style.width = heat / heatmax * 100 + "%";
 	}
 
 }

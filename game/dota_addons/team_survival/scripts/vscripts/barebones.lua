@@ -313,19 +313,57 @@ function GameMode:OnHeroInGame(hero)
 	item = CreateItem("item_team_survival_miner_tools", hero, hero)
 	hero:AddItem(item)
 
-	hero.energymax = 100
+	hero.energymax = 5
 	hero.energy = hero.energymax
-	hero.heatmax = 200
+	hero.heatmax = 10
 	hero.heat = hero.heatmax
 
-	local event_data = { energy = hero.energy }
+	local event_data = { energymax = hero.energymax, energy = hero.energy }
 	CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_energy_change", event_data)
 
-	event_data = { heatmax = 200, heat = hero.heatmax }
+	event_data = { heatmax = hero.heatmax, heat = hero.heat }
 	CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_heat_change", event_data)
 
+	GameMode:AddEnergyTimer(hero, 1)
+	GameMode:AddHeatTimer(hero)
 	--GameMode:AddPeriodicalEnergyLoss(hero)
 end
+
+function GameMode:AddEnergyTimer(hero, tickTime)
+	Timers:CreateTimer("EnergyTimer", { callback = function()
+			local energyTick = 1
+			print("tick.")
+			if hero.energy - energyTick <= 0 then
+				hero.energy = 0
+				-- remove timer OR  + modifier counts in the tick so it counteracts the loss)
+				Timers:RemoveTimer("EnergyTimer")
+				print("removed.")
+				-- force coma
+				tickTime = nil
+			else
+				hero.energy = hero.energy - energyTick
+			end
+			local event_data = { energy = hero.energy }
+			CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_energy_change", event_data)			
+			return tickTime
+		end})
+end
+
+function GameMode:AddHeatTimer(hero)
+	Timers:CreateTimer("HeatTimer", { callback = function()
+			local heatTick = 1
+			if hero.heat - heatTick <= 0 then
+				hero.heat = 0
+				-- apply freezing modifier
+			else
+				hero.heat = hero.heat - heatTick
+			end
+			local event_data = { heat = hero.heat }
+			CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_heat_change", event_data)			
+			return 1
+		end})
+end
+
 --[[
 function GameMode:AddPeriodicalEnergyLoss( hero )
 	print("----**********************************----------------")

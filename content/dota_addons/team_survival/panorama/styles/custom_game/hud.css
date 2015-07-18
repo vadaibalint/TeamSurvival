@@ -1,33 +1,17 @@
 .container{
-	background-color: #AAAAAA;
-	border: 1px solid red;
 	width: 500px;
 	horizontal-align: center;
 	flow-children: down;
-	y: 80%;
-}
-
-/*.resource{
-	font-size: 28px;
-	height: 32px;
-	width: 40%;
-	flow-children: right;
-}*/
-
-#energy{
-	background-color: #AAAAFF;
-	border: 1px solid blue;
-	horizontal-align: left;
+	y: 75%;
 }
 
 .resource{ 
-	height: 50px;  /* Can be anything */
+	height: 50px;
 	width: 100%;
 	background-color: #555;
 	border-radius: 10px;
-	padding: 5px;
 	box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
-	/*border: 1px solid green;*/
+	border: 5px solid #222;
 }
 
 .meter{
@@ -36,10 +20,17 @@
   border-bottom-right-radius: 8px;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  background-color: #f1a165;
   box-shadow: 
     inset 0 2px 9px  rgba(255,255,255,0.3),
     inset 0 -2px 6px rgba(0,0,0,0.4);
+}
+
+#energy_meter{
+	background-color: #A0E5F7;
+}
+
+#heat_meter{
+	background-color: #f1a165;
 }
 
 .meter_text{
@@ -47,4 +38,5 @@
 	horizontal-align: center;
 	vertical-align: middle;
 	color: #000;
+	z-index: 1;
 }
