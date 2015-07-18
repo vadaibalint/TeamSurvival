@@ -6,9 +6,14 @@
 		<include src="file://{resources}/scripts/custom_game/hud.js" />
 	</scripts>
 	<Panel class="container">
-		<Panel class="resource" id="energy">
+		<!-- <Panel class="resource" id="energy">
 			<Label text="Energy: " />
 			<Label id="energy_counter" />
+		</Panel> -->
+		<Panel class="resource" id="heat">
+  				<Panel class="meter" id="heat_meter">
+  					<Label class="meter_text" id="heat_text" text="" />
+  				</Panel>
 		</Panel>
 	</Panel>
 </root>
