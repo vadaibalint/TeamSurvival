@@ -203,7 +203,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 		"BaseClass"						"item_datadriven"
 		"AbilityTextureName"			"item_team_survival_miner_tools"
-		//"Model"							"models\props_mines\mine_tool_bucket001.vmdl"
+		"Model"							"models\miner_tools\mine_tool_cluster_01_reference.vmdl"
 
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemInitialCharges" 			"1"

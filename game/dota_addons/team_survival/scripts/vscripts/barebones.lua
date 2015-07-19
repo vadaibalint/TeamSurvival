@@ -313,7 +313,7 @@ function GameMode:OnHeroInGame(hero)
 	item = CreateItem("item_team_survival_miner_tools", hero, hero)
 	hero:AddItem(item)
 
-	hero.energymax = 5
+	hero.energymax = 50
 	hero.energy = hero.energymax
 	hero.heatmax = 10
 	hero.heat = hero.heatmax
@@ -333,6 +333,18 @@ function GameMode:AddEnergy(hero, energy)
 	hero.energy = hero.energy + energy
 	if hero.energy > hero.energymax then
 		hero.energy = hero.energymax
+	end
+end
+
+function GameMode:GetItem(hero, itemName)
+	local item = nil
+	for i=0,5 do
+		item = hero:GetItemInSlot(i)
+		print(item:GetAbilityName())
+		-- if item and item:GetAbilityName() == itemName then
+		-- 	print("item is in slot: " .. i)
+		-- 	return item
+		-- end
 	end
 end
 

@@ -14,7 +14,7 @@
 		"Ability2"				"datadriven_common_sleep"		// Common: Sleep has to be an ability of the hero or the game breaks with coma.
 		"Ability3"				"lua_builder_craft_item"
 		"Ability4"				"lua_builder_craft_building"
-		"Ability5"				"lua_alchemist_craft_potion"
+		"Ability5"				"datadriven_miner_mine"
 		"Ability6"				"lua_alchemist_gather_herb"
 	}
 }
