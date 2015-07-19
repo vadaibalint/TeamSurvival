@@ -324,21 +324,27 @@ function GameMode:OnHeroInGame(hero)
 	event_data = { heatmax = hero.heatmax, heat = hero.heat }
 	CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_heat_change", event_data)
 
-	GameMode:AddEnergyTimer(hero, 1)
+	GameMode:AddEnergyTimer(hero, 1, 1)
 	GameMode:AddHeatTimer(hero)
 	--GameMode:AddPeriodicalEnergyLoss(hero)
 end
 
-function GameMode:AddEnergyTimer(hero, tickTime)
+function GameMode:AddEnergy(hero, energy)
+	hero.energy = hero.energy + energy
+	if hero.energy > hero.energymax then
+		hero.energy = hero.energymax
+	end
+end
+
+function GameMode:AddEnergyTimer(hero, tickTime, energyTick)
 	Timers:CreateTimer("EnergyTimer", { callback = function()
-			local energyTick = 1
-			print("tick.")
 			if hero.energy - energyTick <= 0 then
 				hero.energy = 0
 				-- remove timer OR  + modifier counts in the tick so it counteracts the loss)
 				Timers:RemoveTimer("EnergyTimer")
-				print("removed.")
 				-- force coma
+				local sleep = hero:FindAbilityByName("datadriven_common_sleep")
+				sleep:ApplyDataDrivenModifier(hero, hero, "modifier_coma", { duration = 10 })
 				tickTime = nil
 			else
 				hero.energy = hero.energy - energyTick

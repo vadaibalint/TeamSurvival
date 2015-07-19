@@ -1,3 +1,18 @@
+function OnComaCreated(keys)
+        local hero = keys.caster
+        Timers:CreateTimer("ComaTimer", { endTime = 1, callback = function()
+                        GameMode:AddEnergy(hero, 1)
+                        local event_data = { energy = hero.energy }
+                        CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_energy_change", event_data)
+                        return 1
+                end})
+end
+
+function OnComaDestroy(keys)
+        Timers:RemoveTimer("ComaTimer")
+        GameMode:AddEnergyTimer(keys.caster, 1, 1)
+end
+
 function OnMineFinished(keys)
 	local caster = keys.caster
 	local mineLvl = caster:FindAbilityByName("datadriven_miner_mine"):GetLevel()
@@ -25,6 +40,8 @@ function OnChopChopFinished(keys)
         item:LaunchLoot(false, 200, 0.75, pos_launch)
 	end
 
+
+        -- move to SpellStart?
         local tree = keys.target
 
         if tree.health then
