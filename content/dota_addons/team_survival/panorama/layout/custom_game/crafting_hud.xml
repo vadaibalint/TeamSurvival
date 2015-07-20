@@ -21,6 +21,11 @@
 		</Panel>
 		<!-- Building crafting HUD-->
 		<Panel class="craftingContainer" id="buildingCrafting">
+			<!-- Building Campfire-->
+			<Button class="craftingButton" id="item_team_survival_building_campfire" onactivate="OnButtonPressed('item_team_survival_building_campfire')">
+				<!-- <Image src="file://{images}/craft_item_axe.png" /> -->
+				<Label class="craftingButtonLabel" text="Build Campfire." />
+			</Button>
 			<!-- Building Wall-->
 			<Button class="craftingButton" id="building_wall" onactivate="OnButtonPressed('wall')">
 				<!-- <Image src="file://{images}/craft_item_axe.png" /> -->

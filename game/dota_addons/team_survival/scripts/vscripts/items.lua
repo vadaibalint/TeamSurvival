@@ -47,4 +47,12 @@ function AddMinerAbilities(keys)
 	end
 end
 
-
+function Build(keys)
+	print("trying to build.")
+	local ability = keys.ability
+	local location = ability:GetCursorPosition()
+	local caster = keys.caster
+	local buildingName = string.sub(ability:GetAbilityName(), 6)
+	CreateUnitByName(buildingName, location, true, caster, caster, caster:GetTeamNumber())
+	print("building done.")
+end

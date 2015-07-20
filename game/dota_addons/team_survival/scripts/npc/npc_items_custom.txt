@@ -232,4 +232,44 @@
 		}
 	}
 
+	//=================================================================================================================
+	// Building: Campfire
+	//=================================================================================================================
+	"item_team_survival_building_campfire"
+	{
+		"ID"							"6001"		
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_team_survival_building_campfire"
+		//"Model"							"models\miner_tools\mine_tool_cluster_01_reference.vmdl"
+
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemInitialCharges" 			"1"
+		"ItemDisplayCharges" 			"0"
+		"ItemRequiresCharges" 			"1"
+		"ItemStackable" 				"0"
+		"ItemPermanent" 				"0"
+
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"60.0"
+		"AbilityCastRange"				"500"
+		"AbilityCastPoint"				"0.0"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{
+			"SpendCharge" {}
+			"RunScript"
+    		{
+          		"ScriptFile" "items.lua"
+            	"Function"   "Build"
+    		}
+		}
+	}
+
 }

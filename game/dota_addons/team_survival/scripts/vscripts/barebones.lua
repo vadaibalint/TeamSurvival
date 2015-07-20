@@ -711,17 +711,11 @@ function GameMode:GetItems(caster)
 end
 
 function OnCraftAbilityUsed(eventSourceIndex, args)
-	-- print("Trying to craft: " .. event_data.item_id);
-	print( "My event: ( " .. eventSourceIndex .. ", " .. args['item_id'] .. " )" )
-
 	local player = EntIndexToHScript(eventSourceIndex)
 	local hero = player:GetAssignedHero()
 
 	-- TODO refine this!! this part looks such a mess, there HAS TO BE a way to do it better
 	local req = args['requirement']
-	DeepPrintTable(req)
-	print(req)
-
 	local max = 0
 	local readtable = {}
 	for k,v in pairs(req) do
@@ -732,14 +726,13 @@ function OnCraftAbilityUsed(eventSourceIndex, args)
 		end
 		readtable[knum] = v
 	end
-	print("max : " .. max)
 
+	-- Remove the required items from the inventory
 	for i=0,max,2 do
 		local itemName = readtable[i]
 		local itemCount = readtable[i+1]
 		
 		for i=1,itemCount do
-			print("trying to remove : " .. itemName)
 			for i=0,5 do
 				local item = hero:GetItemInSlot(i)
 				if item and item:GetAbilityName() == itemName then
@@ -750,6 +743,7 @@ function OnCraftAbilityUsed(eventSourceIndex, args)
 		end
 	end
 	
-	local craftedItem = CreateItem(args['item_id'], nil, nil)
+	-- Place crafted item in the inventory
+	local craftedItem = CreateItem(args['id'], nil, nil)
 	hero:AddItem(craftedItem)
 end

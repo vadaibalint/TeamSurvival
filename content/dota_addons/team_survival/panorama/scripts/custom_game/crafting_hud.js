@@ -19,6 +19,12 @@ function UpdateCraftingUI()
 		UpdateCraftingButton(buttons[i], items);
 	};
 
+	buttons = $("#buildingCrafting").FindChildrenWithClassTraverse("craftingButton");
+	for (var i = 0; i < buttons.length; i++) {
+		// CraftItem lvl can be passed so lvlreq can be checked as well
+		UpdateCraftingButton(buttons[i], items);
+	};
+
 	if(isUIActive) {
 		$.Schedule(0.1, UpdateCraftingUI);
 	};
@@ -44,12 +50,18 @@ function GetItemsInInventory()
 function UpdateCraftingButton(button, items)
 {
 	switch(button.id){
+		// ----------- ITEMS -----------
 		case "item_axe":
 			SetCraftableFlag(button, items, ["item_team_survival_wood", "2", "item_team_survival_rock", "1"]);
 			break;
 		case "item_spear":
 			SetCraftableFlag(button, items, ["item_team_survival_wood", "3"]);
 			break;
+		// ----------- BUIDLINGS -----------
+		case "item_team_survival_building_campfire":
+			SetCraftableFlag(button, items, ["item_team_survival_wood", "1", "item_team_survival_rock", "1"]);
+			break;
+		// ----------- POTIONS -----------
 		default:
 			break;
 	}
@@ -89,6 +101,9 @@ function OnCraftBuildingAbilityEvent(event_data)
 	} else{
 		$("#buildingCrafting").visible = false;
 	}
+
+	isUIActive = !isUIActive;
+	UpdateCraftingUI();
 }
 
 function OnCraftPotionAbilityEvent(event_data)
@@ -109,6 +124,6 @@ function OnButtonPressed(id)
 		// do smth
 		// send cost?
 		$.Msg("Button req. -> ", button.requirement);
-		GameEvents.SendCustomGameEventToServer( "event_craft_ability_used", { "item_id" : id, "requirement" : button.requirement } );
+		GameEvents.SendCustomGameEventToServer( "event_craft_ability_used", { "id" : id, "requirement" : button.requirement } );
 	}
 }

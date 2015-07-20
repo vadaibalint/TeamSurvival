@@ -54,3 +54,7 @@ function OnChopChopFinished(keys)
                 tree.health = 5
         end
 end
+
+function CampFireAura(keys)
+        print("aura created.....")
+end

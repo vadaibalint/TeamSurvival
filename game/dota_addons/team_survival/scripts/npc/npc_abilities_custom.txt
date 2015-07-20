@@ -520,4 +520,82 @@
 
 	  	// Special
 	}
+
+	//=================================================================================================================
+	// Building Ability - Campfire heat aura
+	//=================================================================================================================
+	"building_campfire_heat_aura"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				 "ability_datadriven"
+		"ScriptFile"			 "lua_builder_craft_building"
+	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+	    "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+	    "MaxLevel"               "1"
+	    "RequiredLevel"          "0"
+	    "LevelsBetweenUpgrades"  "1"
+	    
+	    "AbilityCastPoint"       "0.0"
+	    "AnimationPlaybackRate"  "1"
+	    "AnimationIgnoresModelScale" "1"
+
+	    // Stats
+	    //----------------------------------------------------------------------------------------
+	    "AbilityManaCost"       "0"
+	    "AbilityCooldown"       "0.0"
+
+		"Target"
+		{
+		    "Center"    "CASTER"
+		    "Radius"    "%radius"
+		    "Teams"  	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		}
+
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_campfire_heat"
+				"Target" 		"TARGET"
+				"Duration"		"%duration"
+			}
+		}
+	  	// Special
+	  	"Modifiers"
+		{
+			"OnCreated"
+			{
+				"RunScript"
+				{	
+					// should use thinker instead...
+					"ScriptFile"	"abilities.lua"
+					"Function"		"CampFireAura"
+				}	
+			}
+
+			"modifier_campfire_heat"
+			{
+				"Passive"			"1"
+				"IsHidden"			"0"
+				"IsDebuff"			"0"
+				"Duration"			"%duration"
+			}
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"600"
+			}
+
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"duration"			"30"
+			}
+		}
 }
