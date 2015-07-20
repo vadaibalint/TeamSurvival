@@ -56,5 +56,15 @@ function OnChopChopFinished(keys)
 end
 
 function CampFireAura(keys)
-        print("aura created.....")
+        local caster = keys.caster
+        local unitsInRange = FindUnitsInRadius(caster:GetTeam(), caster:GetAbsOrigin(), nil, 500, DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+                                DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
+
+        for _,hero in pairs(unitsInRange) do
+                if hero.heat then
+                        GameMode:AddHeat(hero, 2)
+                        local event_data = { heat = hero.heat }
+                        CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_heat_change", event_data)
+                end
+        end
 end

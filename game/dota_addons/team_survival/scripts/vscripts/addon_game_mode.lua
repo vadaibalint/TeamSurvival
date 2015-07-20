@@ -10,6 +10,7 @@ function Precache( context )
 			PrecacheResource( "particle_folder", "particles/folder", context )
 	]]
 	PrecacheResource("model", "models/heroes/lycan/lycan_wolf.vmdl", context)
+	PrecacheResource("model", "models/items/invoker/forge_spirit/arsenal_magus_forged_spirit/arsenal_magus_forged_spirit.vmdl", context)
 end
 
 -- Create the game mode when we activate

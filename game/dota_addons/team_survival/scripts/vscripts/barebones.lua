@@ -336,6 +336,13 @@ function GameMode:AddEnergy(hero, energy)
 	end
 end
 
+function GameMode:AddHeat(hero, heat)
+	hero.heat = hero.heat + heat
+	if hero.heat > hero.heatmax then
+		hero.heat = hero.heatmax
+	end
+end
+
 function GameMode:GetItem(hero, itemName)
 	local item = nil
 	for i=0,5 do

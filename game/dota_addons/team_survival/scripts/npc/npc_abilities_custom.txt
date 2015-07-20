@@ -558,29 +558,29 @@
 			"ApplyModifier"
 			{
 				"ModifierName"	"modifier_campfire_heat"
-				"Target" 		"TARGET"
+				"Target" 		"CASTER"
 				"Duration"		"%duration"
 			}
 		}
 	  	// Special
 	  	"Modifiers"
 		{
-			"OnCreated"
-			{
-				"RunScript"
-				{	
-					// should use thinker instead...
-					"ScriptFile"	"abilities.lua"
-					"Function"		"CampFireAura"
-				}	
-			}
-
 			"modifier_campfire_heat"
 			{
 				"Passive"			"1"
 				"IsHidden"			"0"
 				"IsDebuff"			"0"
 				"Duration"			"%duration"
+				"ThinkInterval" 	"1"
+			    "OnIntervalThink"
+			    {
+			    	"RunScript"
+					{	
+						// should use thinker instead...
+						"ScriptFile"	"abilities.lua"
+						"Function"		"CampFireAura"
+					}	
+			    }
 			}
 		}
 
