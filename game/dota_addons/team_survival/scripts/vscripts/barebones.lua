@@ -252,26 +252,40 @@ end
 function GameMode:OnAllPlayersLoaded()
 	print("[BAREBONES] All Players have loaded into the game")
 
+	-- GameMode:StartWaveSpawning()
+	GameMode:StartResourceSpawning()
+end
+
+function GameMode:StartResourceSpawning()
 	local spawner = Entities:FindByName(nil, "spawner_rock")
 	local cord =  spawner:GetAbsOrigin()
-	print("nwaveunits")
-	print(self.nWaveUnits)
+	Timers:CreateTimer("ResourceSpawner", {callback = 
+		function()
+			cord = cord + RandomVector(RandomFloat(100, 400))
+			local rock = CreateUnitByName("team_survival_rock", cord, true, nil, nil, DOTA_TEAM_NEUTRALS)
+			rock:SetModelScale(RandomFloat(0.5, 2.0))
+			rock:SetAngles(0.0, RandomFloat(0.0, 360.0), 0.0)
+			return 5
+		end}
+	)
+end
+
+function GameMode:StartWaveSpawning()
+	local spawner = Entities:FindByName(nil, "spawner_rock")
+	local cord =  spawner:GetAbsOrigin()
 	local unitNum = self.nWaveUnits
-	-- Timers:CreateTimer("WaveSpawner", {callback = 
-	-- 	function()
-	-- 		print("wave is active")
-	-- 		if unitNum < 5 then
-	-- 			print(unitNum .. " -> need more units")
-	-- 			CreateUnitByName("team_survival_wave_wolf", cord, true, nil, nil, DOTA_TEAM_BADGUYS)
-	-- 			unitNum =  unitNum + 1
-	-- 			return 1
-	-- 		else
-	-- 			print("wave ended, waiting 5 sec")
-	-- 			unitNum = 0
-	-- 			return 5
-	-- 		end
-	-- 	end}
-	-- )
+	Timers:CreateTimer("WaveSpawner", {callback = 
+		function()
+			if unitNum < 5 then
+				CreateUnitByName("team_survival_wave_wolf", cord, true, nil, nil, DOTA_TEAM_BADGUYS)
+				unitNum =  unitNum + 1
+				return 1
+			else
+				unitNum = 0
+				return 5
+			end
+		end}
+	)
 end
 
 --[[
