@@ -261,7 +261,7 @@ function GameMode:StartResourceSpawning()
 	local cord =  spawner:GetAbsOrigin()
 	Timers:CreateTimer("ResourceSpawner", {callback = 
 		function()
-			cord = cord + RandomVector(RandomFloat(100, 400))
+			cord = spawner:GetAbsOrigin() + RandomVector(RandomFloat(100, 400))
 			local rock = CreateUnitByName("team_survival_rock", cord, true, nil, nil, DOTA_TEAM_NEUTRALS)
 			rock:SetModelScale(RandomFloat(0.5, 2.0))
 			rock:SetAngles(0.0, RandomFloat(0.0, 360.0), 0.0)
@@ -338,7 +338,7 @@ function GameMode:OnHeroInGame(hero)
 	event_data = { heatmax = hero.heatmax, heat = hero.heat }
 	CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_heat_change", event_data)
 
-	GameMode:AddEnergyTimer(hero, 1, 1)
+	GameMode:AddEnergyTimer(hero, 1, -1)
 	GameMode:AddHeatTimer(hero)
 	--GameMode:AddPeriodicalEnergyLoss(hero)
 end
@@ -347,6 +347,8 @@ function GameMode:AddEnergy(hero, energy)
 	hero.energy = hero.energy + energy
 	if hero.energy > hero.energymax then
 		hero.energy = hero.energymax
+	elseif hero.energy < 0  then
+		hero.energy = 0
 	end
 end
 
@@ -371,16 +373,14 @@ end
 
 function GameMode:AddEnergyTimer(hero, tickTime, energyTick)
 	Timers:CreateTimer("EnergyTimer", { callback = function()
-			if hero.energy - energyTick <= 0 then
-				hero.energy = 0
-				-- remove timer OR  + modifier counts in the tick so it counteracts the loss)
+			GameMode:AddEnergy(hero, energyTick)
+			if hero.energy == 0 then
+				-- Timer naming conflict?
 				Timers:RemoveTimer("EnergyTimer")
 				-- force coma
 				local sleep = hero:FindAbilityByName("datadriven_common_sleep")
 				sleep:ApplyDataDrivenModifier(hero, hero, "modifier_coma", { duration = 10 })
 				tickTime = nil
-			else
-				hero.energy = hero.energy - energyTick
 			end
 			local event_data = { energy = hero.energy }
 			CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_energy_change", event_data)			
@@ -402,74 +402,6 @@ function GameMode:AddHeatTimer(hero)
 			return 1
 		end})
 end
-
---[[
-function GameMode:AddPeriodicalEnergyLoss( hero )
-	print("----**********************************----------------")
-	print(hero.energy)
-	--Timers:CreateTimer("PeriodicalEnergyLoss", {callback = GameMode:PeriodicalEnergyLoss(hero)})
-	Timers:CreateTimer("PeriodicalEnergyLoss", {callback = 
-		function()
-			print("timed energy loss")
-			if  hero.energy - 1 <= 0 then
-				-- collapse
-				print("noloss" .. hero.energy)
-				hero.energy = 0
-				print("noloss" .. hero.energy)
-
-				GameMode:RemovePeriodicalEnergyLoss(hero)
-			else
-				print("loss" .. hero.energy)
-				hero.energy = hero.energy - 1
-				print("loss" .. hero.energy)
-			end
-			local event_data = {
-				energy = hero.energy
-			}
-			print("Energy: " .. hero.energy .. " EventCall")
-			--hero.player = PlayerResource:GetPlayer(hero:GetPlayerID())
-			print("Energy: " .. hero.energy .. " EventCall222222222222222")
-			CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_energy_change", event_data)
-			print("waaaaaaaaaaaaaaaaaaaa")
-			return 3
-		end})
-end
-
-function GameMode:PeriodicalEnergyLoss( hero )
-	print("timed energy loss")
-	if  hero.energy - 1 <= 0 then
-		-- collapse
-		print("noloss" .. hero.energy)
-		hero.energy = 0
-		print("noloss" .. hero.energy)
-
-		GameMode:RemovePeriodicalEnergyLoss(hero)
-	else
-		print("loss" .. hero.energy)
-		hero.energy = hero.energy - 1
-		print("loss" .. hero.energy)
-	end
-	local event_data = {
-		energy = hero.energy
-	}
-	print("Energy: " .. hero.energy .. " EventCall")
-	--hero.player = PlayerResource:GetPlayer(hero:GetPlayerID())
-	print("Energy: " .. hero.energy .. " EventCall222222222222222")
-	CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_energy_change", event_data)
-	print("waaaaaaaaaaaaaaaaaaaa")
-	return 15
-end
-
-function GameMode:RemovePeriodicalEnergyLoss( hero )
-	Timers:RemoveTimer("PeriodicalEnergyLoss")
-	print("timer removed")
-	local event_data = {
-				energy = hero.energy
-			}
-			print("Energy: " .. hero.energy .. "Event from timerremove.")
-	CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_energy_change", event_data)
-end
-]]
 
 --[[
 	This function is called once and only once when the game completely begins (about 0:00 on the clock).  At this point,

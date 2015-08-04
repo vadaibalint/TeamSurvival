@@ -183,7 +183,7 @@
 	}
 
 	//=================================================================================================================
-	// Miner Ability - Mine
+	// DEPRECATED -- Miner Ability - Mine
 	//=================================================================================================================
 	"datadriven_miner_mine"
 	{
@@ -211,6 +211,15 @@
 	    "AbilityChannelTime"	"5.0"
 	    "AbilityCastRange"      "200"
 
+	    "OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"abilities.lua"
+	  			"Function"		"OnGatherStarted"
+	    	}
+	    }
+
 	  	// Special
 	  	"OnChannelSucceeded"
 	  	{
@@ -223,7 +232,7 @@
 	}
 
 	//=================================================================================================================
-	// Miner Ability - ChopChop
+	// DEPRECATED -- Miner Ability - ChopChop
 	//=================================================================================================================
 	"datadriven_miner_chopchop"
 	{
@@ -259,6 +268,39 @@
 	  			"Function"		"OnChopChopFinished"
 	  		}
 	  	}
+	}
+
+	//=================================================================================================================
+	// Miner Ability - Gather Resource
+	//=================================================================================================================
+	"lua_miner_gather_resource"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				 "ability_lua"
+		"ScriptFile"			 "lua_miner_gather_resource"
+	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+	    "AbilityUnitTargetTeam"	 "DOTA_UNIT_TARGET_TEAM_ENEMY"
+	    "AbilityUnitTargetType"	 "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_TREE"
+	    "AbilityTextureName"     "miner_gather_resource"
+
+	    "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+	    "MaxLevel"               "4"
+	    "RequiredLevel"          "0"
+	    "LevelsBetweenUpgrades"  "1"
+	    
+	    "AbilityCastPoint"       "0.0"
+	    "AnimationPlaybackRate"  "1"
+	    "AnimationIgnoresModelScale" "1"
+
+	    // Stats
+	    //----------------------------------------------------------------------------------------
+	    "AbilityManaCost"       "0"
+	    "AbilityCooldown"       "3.0"
+	    "AbilityChannelTime"	"30.0"
+	    "AbilityCastRange"      "200"
+
+	  	// Special
 	}
 
 	//=================================================================================================================

@@ -9,9 +9,9 @@ function OnComaCreated(keys)
 end
 
 function OnComaDestroy(keys)
-        -- removing this timer may cause problems with multiple players
+        -- Naming conflict?
         Timers:RemoveTimer("ComaTimer")
-        GameMode:AddEnergyTimer(keys.caster, 1, 1)
+        GameMode:AddEnergyTimer(keys.caster, 1, -1)
 end
 
 function OnMineFinished(keys)
