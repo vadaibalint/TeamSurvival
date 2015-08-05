@@ -4,21 +4,54 @@
 "DOTAHeroes"
 {
 	//=================================================================================================================
-	// HERO: Troll
+	// HERO: Fighter
 	//=================================================================================================================
-	"npc_dota_hero_troll_warlord_overridden"
+	"team_survival_fighter"
+	{
+		"override_hero"			"npc_dota_hero_huskar"	// Hero to override
+		"AbilityLayout"			"4"
+		"Ability1"				"datadriven_common_run"
+		"Ability2"				"datadriven_common_sleep"		// Common: Sleep has to be an ability of the hero or the game breaks with coma.
+		"Ability3"				"datadriven_defender_frenzy"
+		"Ability4"				"datadriven_defender_armor_up"
+	}
+
+	//=================================================================================================================
+	// HERO: Miner
+	//=================================================================================================================
+	"team_survival_miner"
 	{
 		"override_hero"			"npc_dota_hero_troll_warlord"	// Hero to override
-		"AbilityLayout"			"6"
+		"AbilityLayout"			"4"
+		"Ability1"				"datadriven_common_run"
+		"Ability2"				"datadriven_common_sleep"		// Common: Sleep has to be an ability of the hero or the game breaks with coma.
+		"Ability3"				"lua_miner_gather_resource"
+		"Ability4"				"lua_miner_refine_resource"
+	}
+
+	//=================================================================================================================
+	// HERO: Crafter
+	//=================================================================================================================
+	"team_survival_crafter"
+	{
+		"override_hero"			"npc_dota_hero_shadow_shaman"	// Hero to override
+		"AbilityLayout"			"4"
 		"Ability1"				"datadriven_common_run"
 		"Ability2"				"datadriven_common_sleep"		// Common: Sleep has to be an ability of the hero or the game breaks with coma.
 		"Ability3"				"lua_builder_craft_item"
 		"Ability4"				"lua_builder_craft_building"
-		"Ability5"				"lua_miner_gather_resource"
-		"Ability6"				"lua_alchemist_gather_herb"
+	}
+
+	//=================================================================================================================
+	// HERO: Alchemist
+	//=================================================================================================================
+	"team_survival_alchemist"
+	{
+		"override_hero"			"npc_dota_hero_witch_doctor"	// Hero to override
+		"AbilityLayout"			"4"
+		"Ability1"				"datadriven_common_run"
+		"Ability2"				"datadriven_common_sleep"		// Common: Sleep has to be an ability of the hero or the game breaks with coma.
+		"Ability3"				"lua_alchemist_gather_herb"
+		"Ability4"				"lua_alchemist_craft_potion"
 	}
 }
-		//"Ability3"				"datadriven_miner_mine"
-		//"Ability4"				"datadriven_miner_chopchop"
-		//"Ability5"				"datadriven_defender_armor_up"
-		//"Ability6"				"datadriven_defender_frenzy"

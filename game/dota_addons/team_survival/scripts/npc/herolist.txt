@@ -1,7 +1,15 @@
 "CustomHeroList"
-{
-	"npc_dota_hero_invoker"		"1"
-	"npc_dota_hero_troll_warlord" 	"1"
-	"npc_dota_hero_wisp"		"1"
-	"npc_dota_hero_troll_warlord_overridden" "1"
+{	
+	// team_survival_alchemist
+	"npc_dota_hero_witch_doctor"	"1"
+
+	// team_survival_crafter
+	"npc_dota_hero_shadow_shaman"	"1"
+
+	// team_survival_fighter
+	"npc_dota_hero_huskar"			"1"
+
+	// team_survival_miner
+	"npc_dota_hero_troll_warlord"	"1"
+	
 }
