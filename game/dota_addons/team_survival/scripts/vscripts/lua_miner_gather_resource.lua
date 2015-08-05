@@ -117,11 +117,11 @@ function lua_miner_gather_resource:AddDrop(drops, chance, itemName)
 end
 
 function lua_miner_gather_resource:DropItems(drops, caster, target)
-	local dir = caster:GetAbsOrigin() - target:GetAbsOrigin()):Normalized()
+	local dir = (caster:GetAbsOrigin() - target:GetAbsOrigin()):Normalized()
 	for i,itemName in ipairs(drops) do
         local item = CreateItem(itemName, nil, nil)
         item:SetPurchaseTime(0)
-        local pos = caster:GetAbsOrigin() + (dir * 100 + RandomVector(RandomFloat(50,100))
+        local pos = caster:GetAbsOrigin() + (dir * 100) + RandomVector(RandomFloat(50,100))
         local drop = CreateItemOnPositionSync(pos, item)
         item:LaunchLoot(false, 200, 0.75, pos)
 	end
