@@ -9,6 +9,7 @@ function Precache( context )
 			PrecacheResource( "particle", "*.vpcf", context )
 			PrecacheResource( "particle_folder", "particles/folder", context )
 	]]
+	PrecacheResource("model", "models/miner_tools/mine_tool_cluster_01_reference.vmdl", context)
 	PrecacheResource("model", "models/heroes/lycan/lycan_wolf.vmdl", context)
 	PrecacheResource("model", "models/items/invoker/forge_spirit/arsenal_magus_forged_spirit/arsenal_magus_forged_spirit.vmdl", context)
 end

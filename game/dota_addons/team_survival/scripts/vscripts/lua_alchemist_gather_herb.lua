@@ -14,7 +14,6 @@ function lua_alchemist_gather_herb:GetCustomCastErrorTarget( hTarget )
 end
 
 function lua_alchemist_gather_herb:OnSpellStart(keys)
-	DeepPrintTable(keys)
 	local caster = self:GetCaster()
 	local gatherHerbLvl = caster:FindAbilityByName("lua_alchemist_gather_herb"):GetLevel()
 	local target = self:GetCursorTarget()

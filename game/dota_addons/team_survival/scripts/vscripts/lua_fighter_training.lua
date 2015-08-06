@@ -2,7 +2,9 @@ lua_fighter_training = class ({})
 LinkLuaModifier("modifier_lua_fighter_training", LUA_MODIFIER_MOTION_NONE)
 
 function lua_fighter_training:OnInventoryContentsChanged()
-	lua_fighter_training:RefreshTrainingModifier(self)
+	if self:GetLevel() > 0 then
+		lua_fighter_training:RefreshTrainingModifier(self)
+	end
  end
 
 function lua_fighter_training:OnUpgrade()
