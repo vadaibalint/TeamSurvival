@@ -12,8 +12,8 @@
 		"AbilityLayout"			"4"
 		"Ability1"				"datadriven_common_run"
 		"Ability2"				"datadriven_common_sleep"		// Common: Sleep has to be an ability of the hero or the game breaks with coma.
-		"Ability3"				"datadriven_defender_frenzy"
-		"Ability4"				"datadriven_defender_armor_up"
+		"Ability3"				"lua_fighter_training"
+		"Ability4"				"datadriven_defender_frenzy"
 	}
 
 	//=================================================================================================================

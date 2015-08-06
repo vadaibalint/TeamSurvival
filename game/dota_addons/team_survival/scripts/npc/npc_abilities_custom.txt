@@ -304,73 +304,21 @@
 	}
 
 	//=================================================================================================================
-	// Fighter Ability - Armor Up
+	// Fighter Ability - Training
 	//=================================================================================================================
-	"datadriven_defender_armor_up"
+	"lua_fighter_training"
 	{
 	    // General  
 	    // ----------------------------------------------------------------------------------------
-	    "BaseClass"              "ability_datadriven"
-	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_TOGGLE"
-	    "AbilityUnitTargetType"	 "DOTA_ABILITY_BEHAVIOR_TOGGLE"
-	    "AbilityTextureName" 	 "defender_armor_up"
+	    "BaseClass"				 "ability_lua"
+		"ScriptFile"			 "lua_fighter_training"
+	    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	    "AbilityTextureName"     "defender_training"
 
 	    "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
 	    "MaxLevel"               "4"
 	    "RequiredLevel"          "0"
 	    "LevelsBetweenUpgrades"  "1"
-	    
-	    "AbilityCastPoint"       "0.0"
-	    "AnimationPlaybackRate"  "1"
-	    "AnimationIgnoresModelScale" "1"
-
-	    // Stats
-	    //----------------------------------------------------------------------------------------
-	    "AbilityManaCost"       "0"
-	    "AbilityCooldown"       "5.0"
-
-	  	// Special
-	  	//----------------------------------------------------------------------------------------
-	  	"OnToggleOn"
-	  	{
-	  		"ApplyModifier"
-	  		{
-	  			"ModifierName"	"defender_armor_up"
-	  			"Target" 		"CASTER"
-	  		}
-	  	}
-	  	"OnToggleOff"
-	  	{
-	  		"RemoveModifier"
-	  		{
-	  			"ModifierName"	"defender_armor_up"
-	  			"Target" 		"CASTER"
-	  		}
-	  	}
-
-	  	"Modifiers"
-	  	{
-	  		"defender_armor_up"
-	  		{
-	  			"Passive"			"0"
-	  			"IsHidden"			"0"
-	  			"IsDebuff"			"0"
-	  	
-	  			"Properties"
-	  			{
-	  				"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor"
-	  			}
-	  		}
-	  	}
-
-	  	"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_FLOAT"
-				"armor"				"5.0 10.0 15.0 20.0"
-			}
-		}
 	}
 
 	//=================================================================================================================

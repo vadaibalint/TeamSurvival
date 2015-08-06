@@ -324,7 +324,7 @@ function GameMode:OnHeroInGame(hero)
 	item = CreateItem("item_team_survival_miner_tools", hero, hero)
 	hero:AddItem(item)
 
-	item = CreateItem("item_team_survival_miner_tools", hero, hero)
+	item = CreateItem("item_armor", hero, hero)
 	hero:AddItem(item)
 
 	hero.energymax = 50
