@@ -144,7 +144,7 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"item_datadriven"
-		"AbilityTextureName"			"item_armor"
+		"AbilityTextureName"			"item_dummy"
 		"ItemDroppable" 				"1"
 
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -244,7 +244,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
 		"BaseClass"						"item_datadriven"
-		"AbilityTextureName"			"item_team_survival_miner_tools"
+		"AbilityTextureName"			"item_dummy"
 		"Model"							"models\miner_tools\mine_tool_cluster_01_reference.vmdl"
 
 		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
