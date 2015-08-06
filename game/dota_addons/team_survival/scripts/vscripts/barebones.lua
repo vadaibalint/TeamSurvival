@@ -331,12 +331,14 @@ function GameMode:OnHeroInGame(hero)
 	hero.energy = hero.energymax
 	hero.heatmax = 10
 	hero.heat = hero.heatmax
+	hero.foodmax = 100
+	hero.food = hero.foodmax
+	hero.watermax = 300
+	hero.water = hero.watermax
 
-	local event_data = { energymax = hero.energymax, energy = hero.energy }
-	CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_energy_change", event_data)
-
-	event_data = { heatmax = hero.heatmax, heat = hero.heat }
-	CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_heat_change", event_data)
+	event_data = { energymax = hero.energymax, energy = hero.energy, heatmax = hero.heatmax, heat = hero.heat,
+					foodmax = hero.foodmax, food = hero.food, watermax = hero.watermax, water = hero.water }
+	CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_resource_change", event_data)
 
 	GameMode:AddEnergyTimer(hero, 1, -1)
 	GameMode:AddHeatTimer(hero)
@@ -383,7 +385,7 @@ function GameMode:AddEnergyTimer(hero, tickTime, energyTick)
 				tickTime = nil
 			end
 			local event_data = { energy = hero.energy }
-			CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_energy_change", event_data)			
+			CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_resource_change", event_data)			
 			return tickTime
 		end})
 end
@@ -398,7 +400,7 @@ function GameMode:AddHeatTimer(hero)
 				hero.heat = hero.heat - heatTick
 			end
 			local event_data = { heat = hero.heat }
-			CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_heat_change", event_data)			
+			CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_resource_change", event_data)			
 			return 1
 		end})
 end

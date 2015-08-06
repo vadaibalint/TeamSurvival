@@ -16,5 +16,15 @@
   			<Panel class="meter" id="heat_meter">
   			</Panel>
 		</Panel>
+		<Panel class="resource" id="food">
+			<Label class="meter_text" id="food_text" text="" />
+  			<Panel class="meter" id="food_meter">
+  			</Panel>
+		</Panel>
+		<Panel class="resource" id="water">
+			<Label class="meter_text" id="water_text" text="" />
+  			<Panel class="meter" id="water_meter">
+  			</Panel>
+		</Panel>
 	</Panel>
 </root>
