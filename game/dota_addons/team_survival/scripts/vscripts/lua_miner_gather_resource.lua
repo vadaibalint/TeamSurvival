@@ -33,6 +33,7 @@ function lua_miner_gather_resource:OnSpellStart()
 	-- Timer name conflict?
 	Timers:CreateTimer("ResourceGathering", {endTime = 5, callback =
 		function ()
+			-- maybe not working?
 			if target:IsAlive() then
 				local drops = {}
 
@@ -42,7 +43,8 @@ function lua_miner_gather_resource:OnSpellStart()
 					drops = lua_miner_gather_resource:GetRockDrops(gatherLvl)
 				end
 
-				lua_miner_gather_resource:DropItems(drops, caster, target)
+				GameMode:DropItems(drops, target)
+				-- GameMode:DropItems(drops, caster, target)
 				
 				target.health = target.health - 1
 
@@ -71,19 +73,19 @@ end
 function lua_miner_gather_resource:GetWoodDrops(gatherLvl)
 	local drops = {}
 	if gatherLvl == 1 then
-		lua_miner_gather_resource:AddDrop(drops, 25, "item_team_survival_wood")
+		GameMode:AddDrop(drops, 25, "item_team_survival_wood")
 	elseif gatherLvl == 2 then
-		lua_miner_gather_resource:AddDrop(drops, 75, "item_team_survival_wood")
-		lua_miner_gather_resource:AddDrop(drops, 25, "item_team_survival_wood")
+		GameMode:AddDrop(drops, 75, "item_team_survival_wood")
+		GameMode:AddDrop(drops, 25, "item_team_survival_wood")
 	elseif gatherLvl == 3 then
-		lua_miner_gather_resource:AddDrop(drops, 100, "item_team_survival_wood")
-		lua_miner_gather_resource:AddDrop(drops, 50, "item_team_survival_wood")
-		lua_miner_gather_resource:AddDrop(drops, 25, "item_team_survival_wood")
+		GameMode:AddDrop(drops, 100, "item_team_survival_wood")
+		GameMode:AddDrop(drops, 50, "item_team_survival_wood")
+		GameMode:AddDrop(drops, 25, "item_team_survival_wood")
 	elseif gatherLvl == 4 then
-		lua_miner_gather_resource:AddDrop(drops, 100, "item_team_survival_wood")
-		lua_miner_gather_resource:AddDrop(drops, 100, "item_team_survival_wood")
-		lua_miner_gather_resource:AddDrop(drops, 50, "item_team_survival_wood")
-		lua_miner_gather_resource:AddDrop(drops, 25, "item_team_survival_wood")
+		GameMode:AddDrop(drops, 100, "item_team_survival_wood")
+		GameMode:AddDrop(drops, 100, "item_team_survival_wood")
+		GameMode:AddDrop(drops, 50, "item_team_survival_wood")
+		GameMode:AddDrop(drops, 25, "item_team_survival_wood")
 	end
 
 	return drops
@@ -92,37 +94,37 @@ end
 function lua_miner_gather_resource:GetRockDrops(gatherLvl)
 	local drops = {}
 	if gatherLvl == 1 then
-		lua_miner_gather_resource:AddDrop(drops, 25, "item_team_survival_rock")
+		GameMode:AddDrop(drops, 25, "item_team_survival_rock")
 	elseif gatherLvl == 2 then
-		lua_miner_gather_resource:AddDrop(drops, 75, "item_team_survival_rock")
-		lua_miner_gather_resource:AddDrop(drops, 25, "item_team_survival_rock")
+		GameMode:AddDrop(drops, 75, "item_team_survival_rock")
+		GameMode:AddDrop(drops, 25, "item_team_survival_rock")
 	elseif gatherLvl == 3 then
-		lua_miner_gather_resource:AddDrop(drops, 100, "item_team_survival_rock")
-		lua_miner_gather_resource:AddDrop(drops, 50, "item_team_survival_rock")
-		lua_miner_gather_resource:AddDrop(drops, 25, "item_team_survival_rock")
+		GameMode:AddDrop(drops, 100, "item_team_survival_rock")
+		GameMode:AddDrop(drops, 50, "item_team_survival_rock")
+		GameMode:AddDrop(drops, 25, "item_team_survival_rock")
 	elseif gatherLvl == 4 then
-		lua_miner_gather_resource:AddDrop(drops, 100, "item_team_survival_rock")
-		lua_miner_gather_resource:AddDrop(drops, 100, "item_team_survival_rock")
-		lua_miner_gather_resource:AddDrop(drops, 50, "item_team_survival_rock")
-		lua_miner_gather_resource:AddDrop(drops, 25, "item_team_survival_rock")
+		GameMode:AddDrop(drops, 100, "item_team_survival_rock")
+		GameMode:AddDrop(drops, 100, "item_team_survival_rock")
+		GameMode:AddDrop(drops, 50, "item_team_survival_rock")
+		GameMode:AddDrop(drops, 25, "item_team_survival_rock")
 	end
 
 	return drops
 end
 
-function lua_miner_gather_resource:AddDrop(drops, chance, itemName)
-	if chance == 100 or RollPercentage(chance) then
-		table.insert(drops, itemName)
-	end
-end
+-- function lua_miner_gather_resource:AddDrop(drops, chance, itemName)
+-- 	if chance == 100 or RollPercentage(chance) then
+-- 		table.insert(drops, itemName)
+-- 	end
+-- end
 
-function lua_miner_gather_resource:DropItems(drops, caster, target)
-	local dir = (caster:GetAbsOrigin() - target:GetAbsOrigin()):Normalized()
-	for i,itemName in ipairs(drops) do
-        local item = CreateItem(itemName, nil, nil)
-        item:SetPurchaseTime(0)
-        local pos = caster:GetAbsOrigin() + (dir * 100) + RandomVector(RandomFloat(50,100))
-        local drop = CreateItemOnPositionSync(pos, item)
-        item:LaunchLoot(false, 200, 0.75, pos)
-	end
-end
+-- function lua_miner_gather_resource:DropItems(drops, caster, target)
+-- 	local dir = (caster:GetAbsOrigin() - target:GetAbsOrigin()):Normalized()
+-- 	for i,itemName in ipairs(drops) do
+--         local item = CreateItem(itemName, nil, nil)
+--         item:SetPurchaseTime(0)
+--         local pos = caster:GetAbsOrigin() + (dir * 100) + RandomVector(RandomFloat(50,100))
+--         local drop = CreateItemOnPositionSync(pos, item)
+--         item:LaunchLoot(false, 200, 0.75, pos)
+-- 	end
+-- end

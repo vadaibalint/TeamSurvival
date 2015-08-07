@@ -254,6 +254,10 @@ function GameMode:OnAllPlayersLoaded()
 
 	-- GameMode:StartWaveSpawning()
 	GameMode:StartResourceSpawning()
+
+	local spawner = Entities:FindByName(nil, "spawner_rock")
+	local cord =  spawner:GetAbsOrigin() + RandomVector(500)
+	local wolf = CreateUnitByName("team_survival_creature_wolf", cord, true, nil, nil, DOTA_TEAM_NEUTRALS)
 end
 
 function GameMode:StartResourceSpawning()
@@ -314,11 +318,11 @@ function GameMode:OnHeroInGame(hero)
 
 	item = CreateItem("item_team_survival_wood", hero, hero)
 	hero:AddItem(item)
-
-	item = CreateItem("item_team_survival_wood", hero, hero)
-	hero:AddItem(item)
 	
 	item = CreateItem("item_team_survival_rock", hero, hero)
+	hero:AddItem(item)
+
+	item = CreateItem("item_team_survival_wooden_hammer", hero, hero)
 	hero:AddItem(item)
 
 	item = CreateItem("item_team_survival_miner_tools", hero, hero)
@@ -327,9 +331,9 @@ function GameMode:OnHeroInGame(hero)
 	item = CreateItem("item_armor", hero, hero)
 	hero:AddItem(item)
 
-	hero.energymax = 50
+	hero.energymax = 500
 	hero.energy = hero.energymax
-	hero.heatmax = 10
+	hero.heatmax = 100
 	hero.heat = hero.heatmax
 	hero.foodmax = 100
 	hero.food = hero.foodmax
@@ -342,7 +346,6 @@ function GameMode:OnHeroInGame(hero)
 
 	GameMode:AddEnergyTimer(hero, 1, -1)
 	GameMode:AddHeatTimer(hero)
-	--GameMode:AddPeriodicalEnergyLoss(hero)
 end
 
 function GameMode:AddEnergy(hero, energy)
@@ -358,18 +361,6 @@ function GameMode:AddHeat(hero, heat)
 	hero.heat = hero.heat + heat
 	if hero.heat > hero.heatmax then
 		hero.heat = hero.heatmax
-	end
-end
-
-function GameMode:GetItem(hero, itemName)
-	local item = nil
-	for i=0,5 do
-		item = hero:GetItemInSlot(i)
-		print(item:GetAbilityName())
-		-- if item and item:GetAbilityName() == itemName then
-		-- 	print("item is in slot: " .. i)
-		-- 	return item
-		-- end
 	end
 end
 
@@ -647,6 +638,44 @@ function GameMode:OnEntityKilled( keys )
 	end
 
 	-- Put code here to handle when an entity gets killed
+	if killedUnit:IsCreature() then
+		print("[TS] creature")
+		GameMode:GenerateDrops(killedUnit, killerEntity)
+		print("[TS] creature 2")
+	end
+end
+
+function GameMode:GenerateDrops(dropper, killer)
+	local drops = {}
+	local dropperName = dropper:GetUnitName()
+	if dropperName == "team_survival_creature_wolf" then
+		GameMode:AddDrop(drops, 100, "item_team_survival_rock")
+	elseif dropperName == "team_survival_rock" then
+		GameMode:AddDrop(drops, 50, "item_team_survival_rock")
+	end
+
+	GameMode:DropItems(drops, dropper, killer)
+end
+
+function GameMode:AddDrop(drops, chance, itemName)
+	if chance == 100 or RollPercentage(chance) then
+		print("[TS] drop added")
+		table.insert(drops, itemName)
+	end
+end
+
+function GameMode:DropItems(drops, dropper, killer)
+	local dir = 0
+	if killer then
+		dir = (killer:GetAbsOrigin() - dropper:GetAbsOrigin()):Normalized()
+	end
+	for i,itemName in ipairs(drops) do
+		print("[TS] dropping: " .. itemName)
+        local item = CreateItem(itemName, nil, nil)
+        item:SetPurchaseTime(0)
+        local pos = dropper:GetAbsOrigin() + (dir * 100) + RandomVector(RandomFloat(50,100))
+       	CreateItemOnPositionSync(pos, item)
+	end
 end
 
 function GameMode:GetItems(caster)

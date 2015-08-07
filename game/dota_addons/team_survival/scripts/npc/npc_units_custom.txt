@@ -194,9 +194,9 @@
 	}
 
 	//=================================================================================	
-	// Wave creature: Wolf
+	// Creature: Wolf
 	//=================================================================================
-	"team_survival_wave_wolf"	
+	"team_survival_creature_wolf"	
 	{
 		// General
 		//----------------------------------------------------------------
@@ -256,7 +256,7 @@
 
 		// Team
 		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_BADGUYS"						// Team name.
+		"TeamName"					"DOTA_TEAM_NEUTRALS"						// Team name.
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
