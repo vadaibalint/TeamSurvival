@@ -3,7 +3,7 @@ function OnComaCreated(keys)
         Timers:CreateTimer("ComaTimer", { endTime = 1, callback = function()
                         GameMode:AddEnergy(hero, 1)
                         local event_data = { energy = hero.energy }
-                        CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_energy_change", event_data)
+                        CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_resource_change", event_data)
                         return 1
                 end})
 end
@@ -64,7 +64,7 @@ function CampFireAura(keys)
                 if hero.heat then
                         GameMode:AddHeat(hero, 2)
                         local event_data = { heat = hero.heat }
-                        CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_heat_change", event_data)
+                        CustomGameEventManager:Send_ServerToPlayer(hero.player, "event_resource_change", event_data)
                 end
         end
 end
