@@ -315,17 +315,20 @@ function GameMode:OnHeroInGame(hero)
 	-- These lines will create an item and add it to the player, effectively ensuring they start with the item
 	local item = CreateItem("item_team_survival_wood", hero, hero)
 	hero:AddItem(item)
-
-	item = CreateItem("item_team_survival_wood", hero, hero)
-	hero:AddItem(item)
 	
 	item = CreateItem("item_team_survival_rock", hero, hero)
 	hero:AddItem(item)
 
+	-- item = CreateItem("item_team_survival_miner_tools", hero, hero)
+	-- hero:AddItem(item)
+	item = CreateItem("item_team_survival_wooden_sword", hero, hero)
+	hero:AddItem(item)
+	
+
 	item = CreateItem("item_team_survival_wooden_hammer", hero, hero)
 	hero:AddItem(item)
 
-	item = CreateItem("item_team_survival_miner_tools", hero, hero)
+	item = CreateItem("item_team_survival_wooden_axe", hero, hero)
 	hero:AddItem(item)
 
 	item = CreateItem("item_armor", hero, hero)
@@ -639,9 +642,7 @@ function GameMode:OnEntityKilled( keys )
 
 	-- Put code here to handle when an entity gets killed
 	if killedUnit:IsCreature() then
-		print("[TS] creature")
 		GameMode:GenerateDrops(killedUnit, killerEntity)
-		print("[TS] creature 2")
 	end
 end
 
@@ -659,7 +660,6 @@ end
 
 function GameMode:AddDrop(drops, chance, itemName)
 	if chance == 100 or RollPercentage(chance) then
-		print("[TS] drop added")
 		table.insert(drops, itemName)
 	end
 end
@@ -670,7 +670,6 @@ function GameMode:DropItems(drops, dropper, killer)
 		dir = (killer:GetAbsOrigin() - dropper:GetAbsOrigin()):Normalized()
 	end
 	for i,itemName in ipairs(drops) do
-		print("[TS] dropping: " .. itemName)
         local item = CreateItem(itemName, nil, nil)
         item:SetPurchaseTime(0)
         local pos = dropper:GetAbsOrigin() + (dir * 100) + RandomVector(RandomFloat(50,100))

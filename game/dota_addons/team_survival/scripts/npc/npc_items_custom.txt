@@ -99,40 +99,6 @@
     		}
 		}
 	}
-	
-
-	//=================================================================================================================
-	// Axe
-	//=================================================================================================================
-	"item_axe"
-	{
-		"ID"							"2001"
-
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
-		"BaseClass"						"item_datadriven"
-		"AbilityTextureName"			"item_axe"
-
-		// Stats		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"10.0"
-		"AbilityCastRange"				"150"
-		"AbilityCastPoint"				"0.3"
-		"AbilityCastAnimation"			"ACT_DOTA_EARTHSHAKER_TOTEM_ATTACK"
-		
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
-		"OnSpellStart"
-		{
-			"RunScript"
-    		{
-          		"ScriptFile" "items.lua"
-            	"Function"   "GainLumber"
-    		}
-		}
-	}
 
 	//=================================================================================================================
 	// Armor
@@ -232,22 +198,91 @@
 		"Model"							"models\props_nature\cattails001.vmdl"
 	}
 
-	//=================================================================================================================
+	//===============================================================================================================================================
 	// 4000 - Equipments
 	//			- 41xx Armor
 	//			- 42xx Weapon
 	// 
 	//			- 4x1x Wooden
-	//			- 4x2x Rock
+	//			- 4x2x Stone
 	//			- 4x3x Metal
-	//=================================================================================================================
+	//===============================================================================================================================================
 
 	//=================================================================================================================
-	// Weapon: Wooden Hammer
+	// 4210 - Weapon: Wooden Axe
+	//=================================================================================================================
+	"item_team_survival_wooden_axe"
+	{
+		"ID"							"4210"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_dummy"
+
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+
+		"Modifiers"
+		{
+			"modifier_wooden_axe"
+			{
+				"Passive"			"1"
+				"IsHidden"			"1"
+				"IsDebuff"			"0"
+
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"			"%chance"
+						"OnSuccess"
+						{
+							"Damage"
+							{
+								"Target"						"TARGET"
+								"Type"							"DAMAGE_TYPE_PHYSICAL"
+								"Damage"						"%percent_damage"
+								"MaxHealthPercentBasedDamage"	"1"
+							}
+						}
+					}
+				}
+		
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "%damage"
+				}
+			}
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"damage"		"10"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"chance"		"25"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"percent_damage"	"1"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// 4211 - Weapon: Wooden Hammer
 	//=================================================================================================================
 	"item_team_survival_wooden_hammer"
 	{
-		"ID"							"4210"
+		"ID"							"4211"
 
 		// General
 		//-------------------------------------------------------------------------------------------------------------
@@ -266,7 +301,7 @@
 				"IsHidden"			"1"
 				"IsDebuff"			"0"
 
-				"OnAttack"
+				"OnAttackLanded"
 				{
 					"Random"
 					{
@@ -299,15 +334,101 @@
 			"02"
 			{
 				"var_type"		"FIELD_INTEGER"
-				"stun_chance"	"50"
+				"stun_chance"	"25"
 			}
 			"03"
 			{
 				"var_type"		"FIELD_FLOAT"
-				"stun_duration"	"3.0"
+				"stun_duration"	"1.0"
 			}
 		}
 	}
+
+	//=================================================================================================================
+	// 4212 - Weapon: Wooden Sword
+	//=================================================================================================================
+	"item_team_survival_wooden_sword"
+	{
+		"ID"							"4210"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_dummy"
+
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+
+		"Modifiers"
+		{
+			"modifier_wooden_sword"
+			{
+				"Passive"			"1"
+				"IsHidden"			"1"
+				"IsDebuff"			"0"
+
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"			"%chance"
+						"OnSuccess"
+						{
+							"ApplyModifier"
+							{
+								"ModifierName"	"modifier_wooden_sword_attack_speed"
+								"Target" 		"CASTER"
+								"Duration"		"%duration"
+							}
+						}
+					}
+				}
+		
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "%damage"
+				}
+			}
+
+			"modifier_wooden_sword_attack_speed"
+			{
+				"Passive"			"0"
+				"IsHidden"			"0"
+				"IsDebuff"			"0"
+			
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attack_speed"
+				}
+			}
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"damage"		"10"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"chance"		"25"
+			}
+			"03"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"duration"		"5"
+			}
+			"04"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"attack_speed"	"50"
+			}
+		}
+	}
+
 
 	//=================================================================================================================
 	// Profession selector: Miner

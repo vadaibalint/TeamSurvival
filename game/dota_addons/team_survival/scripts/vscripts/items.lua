@@ -21,17 +21,6 @@ function SleepingEnergyRegenStop()
 	print("regenTimer removed.")
 end
 
-function GainLumber(keys)
-	local player = keys.caster:GetPlayerOwner()
-	player.lumber = player.lumber + 1
-
-	local event_data = {
-				lumber = player.lumber
-			}
-		
-	CustomGameEventManager:Send_ServerToPlayer(player, "event_resource_change", event_data)
-end
-
 function AddMinerAbilities(keys)
 	local caster = keys.caster
 	if caster:FindAbilityByName("datadriven_miner_mine") then
