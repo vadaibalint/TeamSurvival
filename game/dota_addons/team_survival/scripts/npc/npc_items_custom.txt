@@ -101,47 +101,6 @@
 	}
 
 	//=================================================================================================================
-	// Armor
-	//=================================================================================================================
-	"item_armor"
-	{
-		"ID"							"2043"
-
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"						"item_datadriven"
-		"AbilityTextureName"			"item_dummy"
-
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
-
-		"Modifiers"
-		{
-			"modifier_armor"
-			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-				"IsDebuff"			"0"
-		
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor"
-				}
-			}
-		}
-
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"		"FIELD_INTEGER"
-				"armor"			"2"
-			}
-		}
-	}
-
-	//=================================================================================================================
 	// Resource: Rock
 	//=================================================================================================================
 	"item_team_survival_rock"
@@ -203,10 +162,51 @@
 	//			- 41xx Armor
 	//			- 42xx Weapon
 	// 
-	//			- 4x1x Wooden
+	//			- 4x1x Wooden / Leather
 	//			- 4x2x Stone
 	//			- 4x3x Metal
 	//===============================================================================================================================================
+
+	//=================================================================================================================
+	// 4110 - Armor: Leather Armor
+	//=================================================================================================================
+	"item_team_survival_leather_armor"
+	{
+		"ID"							"4110"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_dummy"
+
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+
+		"Modifiers"
+		{
+			"modifier_armor"
+			{
+				"Passive"			"1"
+				"IsHidden"			"1"
+				"IsDebuff"			"0"
+		
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor"
+				}
+			}
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"armor"			"2"
+			}
+		}
+	}
 
 	//=================================================================================================================
 	// 4210 - Weapon: Wooden Axe
@@ -349,7 +349,7 @@
 	//=================================================================================================================
 	"item_team_survival_wooden_sword"
 	{
-		"ID"							"4210"
+		"ID"							"4212"
 
 		// General
 		//-------------------------------------------------------------------------------------------------------------
@@ -429,6 +429,227 @@
 		}
 	}
 
+
+	//=================================================================================================================
+	// 4220 - Weapon: Stone Axe
+	//=================================================================================================================
+	"item_team_survival_stone_axe"
+	{
+		"ID"							"4220"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_dummy"
+
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+
+		"Modifiers"
+		{
+			"modifier_stone_axe"
+			{
+				"Passive"			"1"
+				"IsHidden"			"1"
+				"IsDebuff"			"0"
+
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"			"%chance"
+						"OnSuccess"
+						{
+							"Damage"
+							{
+								"Target"						"TARGET"
+								"Type"							"DAMAGE_TYPE_PHYSICAL"
+								"Damage"						"%percent_damage"
+								"MaxHealthPercentBasedDamage"	"1"
+							}
+						}
+					}
+				}
+		
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "%damage"
+				}
+			}
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"damage"		"20"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"chance"		"25"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"percent_damage"	"1"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// 4221 - Weapon: Stone Hammer
+	//=================================================================================================================
+	"item_team_survival_stone_hammer"
+	{
+		"ID"							"4221"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_dummy"
+
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+
+		"Modifiers"
+		{
+			"modifier_stone_hammer"
+			{
+				"Passive"			"1"
+				"IsHidden"			"1"
+				"IsDebuff"			"0"
+
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"			"%stun_chance"
+						"OnSuccess"
+						{
+							"Stun"
+							{
+								"Duration"   "%stun_duration"
+								"Target" 	 "TARGET"
+							}
+						}
+					}
+				}
+		
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "%damage"
+				}
+			}
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"damage"		"20"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"stun_chance"	"25"
+			}
+			"03"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"stun_duration"	"1.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// 4222 - Weapon: Stone Sword
+	//=================================================================================================================
+	"item_team_survival_wooden_sword"
+	{
+		"ID"							"4222"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_dummy"
+
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+
+		"Modifiers"
+		{
+			"modifier_stone_sword"
+			{
+				"Passive"			"1"
+				"IsHidden"			"1"
+				"IsDebuff"			"0"
+
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"			"%chance"
+						"OnSuccess"
+						{
+							"ApplyModifier"
+							{
+								"ModifierName"	"modifier_stone_sword_attack_speed"
+								"Target" 		"CASTER"
+								"Duration"		"%duration"
+							}
+						}
+					}
+				}
+		
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "%damage"
+				}
+			}
+
+			"modifier_stone_sword_attack_speed"
+			{
+				"Passive"			"0"
+				"IsHidden"			"0"
+				"IsDebuff"			"0"
+			
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attack_speed"
+				}
+			}
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"damage"		"20"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"chance"		"25"
+			}
+			"03"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"duration"		"5"
+			}
+			"04"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"attack_speed"	"50"
+			}
+		}
+	}
 
 	//=================================================================================================================
 	// Profession selector: Miner
