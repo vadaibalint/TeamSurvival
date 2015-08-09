@@ -8,15 +8,36 @@
 	<Panel class="container">
 		<!-- Item crafting HUD-->
 		<Panel class="craftingContainer" id="itemCrafting">
-			<!-- Item Axe-->
-			<Button class="craftingButton" id="item_axe" onactivate="OnButtonPressed('item_axe')">
-				<Image src="file://{images}/craft_item_axe.png" />
-				<Label class="craftingButtonLabel" text="Build axe." />
-			</Button>
-			<!-- Item Spear-->
-			<Button class="craftingButton" id="item_spear" onactivate="OnButtonPressed('item_spear')">
+			<!-- Item Wooden Hammer -->
+			<Button class="craftingButton" id="item_team_survival_wooden_hammer" onactivate="OnButtonPressed('item_team_survival_wooden_hammer')">
 				<!-- <Image src="file://{images}/craft_item_axe.png" /> -->
-				<Label class="craftingButtonLabel" text="Build spear." />
+				<Label class="craftingButtonLabel" text="Build wooden hammer." />
+			</Button>
+			<!-- Item Wooden Axe -->
+			<Button class="craftingButton" id="item_team_survival_wooden_axe" onactivate="OnButtonPressed('item_team_survival_wooden_axe')">
+				<!-- <Image src="file://{images}/craft_item_axe.png" /> -->
+				<Label class="craftingButtonLabel" text="Build wooden axe." />
+			</Button>
+
+			<!-- Item Wooden Sword -->
+			<Button class="craftingButton" id="item_team_survival_wooden_sword" onactivate="OnButtonPressed('item_team_survival_wooden_sword')">
+				<!-- <Image src="file://{images}/craft_item_axe.png" /> -->
+				<Label class="craftingButtonLabel" text="Build wooden sword." />
+			</Button>
+			<!-- Item Stone Hammer -->
+			<Button class="craftingButton" id="item_team_survival_stone_hammer" onactivate="OnButtonPressed('item_team_survival_stone_hammer')">
+				<!-- <Image src="file://{images}/craft_item_axe.png" /> -->
+				<Label class="craftingButtonLabel" text="Build stone hammer." />
+			</Button>
+			<!-- Item Stone Axe -->
+			<Button class="craftingButton" id="item_team_survival_stone_axe" onactivate="OnButtonPressed('item_team_survival_stone_axe')">
+				<!-- <Image src="file://{images}/craft_item_axe.png" /> -->
+				<Label class="craftingButtonLabel" text="Build stone axe." />
+			</Button>
+			<!-- Item Stone Sword -->
+			<Button class="craftingButton" id="item_team_survival_stone_sword" onactivate="OnButtonPressed('item_team_survival_stone_sword')">
+				<!-- <Image src="file://{images}/craft_item_axe.png" /> -->
+				<Label class="craftingButtonLabel" text="Build stone sword." />
 			</Button>
 		</Panel>
 		<!-- Building crafting HUD-->

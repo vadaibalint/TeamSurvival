@@ -129,13 +129,8 @@ function OnCraftPotionAbilityEvent(event_data)
  
 function OnButtonPressed(id)
 {
-	$.Msg("OnButtonPressed -> ", id);
 	var button = $("#" + id);
-	$.Msg("isCraftable -> ", button.iscraftable);
 	if (button.iscraftable){
-		// do smth
-		// send cost?
-		$.Msg("Button req. -> ", button.requirement);
 		GameEvents.SendCustomGameEventToServer( "event_craft_ability_used", { "id" : id, "requirement" : button.requirement } );
 	}
 }
