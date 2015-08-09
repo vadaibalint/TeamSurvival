@@ -51,11 +51,23 @@ function UpdateCraftingButton(button, items)
 {
 	switch(button.id){
 		// ----------- ITEMS -----------
-		case "item_axe":
+		case "item_team_survival_wooden_hammer":
+			SetCraftableFlag(button, items, ["item_team_survival_wood", "4"]);
+			break;
+		case "item_team_survival_wooden_axe":
+			SetCraftableFlag(button, items, ["item_team_survival_wood", "3"]);
+			break;
+		case "item_team_survival_wooden_sword":
+			SetCraftableFlag(button, items, ["item_team_survival_wood", "3"]);
+			break;
+		case "item_team_survival_stone_hammer":
+			SetCraftableFlag(button, items, ["item_team_survival_wood", "2", "item_team_survival_rock", "2"]);
+			break;
+		case "item_team_survival_stone_axe":
 			SetCraftableFlag(button, items, ["item_team_survival_wood", "2", "item_team_survival_rock", "1"]);
 			break;
-		case "item_spear":
-			SetCraftableFlag(button, items, ["item_team_survival_wood", "3"]);
+		case "item_team_survival_stone_sword":
+			SetCraftableFlag(button, items, ["item_team_survival_wood", "1", "item_team_survival_rock", "2"]);
 			break;
 		// ----------- BUIDLINGS -----------
 		case "item_team_survival_building_campfire":
